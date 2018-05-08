@@ -5,6 +5,12 @@ import SimpleSchema from 'simpl-schema';
 
 export const ClientUrls = new Mongo.Collection('client_urls');
 
+if (Meteor.isServer) {
+  Meteor.publish('client_urls', function () {
+    return ClientUrls.find({})
+  });
+}
+
 Meteor.methods({
   'client_urls.insert'() {
     if (!this.userId) {

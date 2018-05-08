@@ -5,20 +5,15 @@ import { ClientUrls } from './client_urls';
 
 if (Meteor.isServer) {
   describe('client_ulrs', function () {
+    const clientUrlOne = {
+      _id: 'testClientUrlId1',
+      url: 'www.google.com',
+      userId: 'testUserId1'
+    };
 
     beforeEach(function () {
-      const clientUrlOne = {
-        _id: 'testClientUrlId1',
-        url: 'www.google.com',
-        userId: 'testUserId1'
-      };
-
       ClientUrls.remove({});
-      ClientUrls.insert({
-        _id: 'testClientUrlId1',
-        url: 'www.google.com',
-        userId: 'testUserId1'
-      });
+      ClientUrls.insert(clientUrlOne);
     });
 
     it('should insert new client url', function () {
@@ -35,14 +30,15 @@ if (Meteor.isServer) {
     });
 
     it('should remove client url', function () {
-      Meteor.server.method_handlers['client_urls.remove'].apply({ userId: 'testUserId1' }, ['testClientUrlId1']);
+      Meteor.server.method_handlers['client_urls.remove'].apply(
+        { userId: clientUrlOne.userId }, [clientUrlOne._id]);
 
-      expect(ClientUrls.findOne({ _id: 'testClientUrlId1'})).toNotExist();
+      expect(ClientUrls.findOne({ _id: clientUrlOne._id})).toNotExist();
     });
 
     it('should not remove client url if unauthenticated', function () {
       expect(() => {
-        Meteor.server.method_handlers['client_urls.remove'].apply({}, ['testClientUrlId1']);
+        Meteor.server.method_handlers['client_urls.remove'].apply({}, [clientUrlOne._id]);
       }).toThrow();
     });
 
@@ -56,13 +52,13 @@ if (Meteor.isServer) {
       const url = 'http://www.twitter.com';
 
       Meteor.server.method_handlers['client_urls.update'].apply({
-        userId: 'testUserId1'
+        userId: clientUrlOne.userId
       }, [
-        'testClientUrlId1',
+        clientUrlOne._id,
         { url }
       ]);
 
-      const client_url = ClientUrls.findOne('testClientUrlId1');
+      const client_url = ClientUrls.findOne(clientUrlOne._id);
 
       expect(client_url.updatedAt).toBeGreaterThan(0);
       expect(client_url).toInclude({
@@ -73,9 +69,9 @@ if (Meteor.isServer) {
     it('should throw error if invalid client url', function () {
       expect(() => {
         Meteor.server.method_handlers['client_urls.update'].apply({
-          userId: 'testUserId1'
+          userId: clientUrlOne._id
         }, [
-          'testClientUrlId1',
+          clientUrlOne._id,
           { url: 'invalidUrl//https:' }
         ]);
       }).toThrow();

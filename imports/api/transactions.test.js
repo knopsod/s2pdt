@@ -6,17 +6,23 @@ import { Transactions } from './transactions';
 if (Meteor.isServer) {
   describe('transactions', function () {
 
+    const transactionOne = {
+      _id: 'testTransactionId1',
+      userId: 'testUserId1'
+    };
+
     beforeEach(function () {
       Transactions.remove({});
       Transactions.insert({
-        _id: 'testTransactionId1',
-        userId: 'testUserId1'
+        _id: transactionOne._id,
+        userId: transactionOne.userId
       });
     });
 
     it('should insert new transaction', function () {
       const userId = 'testid';
-      const _id = Meteor.server.method_handlers['transactions.insert'].apply({ userId });
+      const _id = Meteor.server.method_handlers['transactions.insert'].apply(
+        { userId });
 
       expect(Transactions.findOne({ _id, userId })).toExist();
     });
@@ -28,14 +34,16 @@ if (Meteor.isServer) {
     });
 
     it('should remove transaction', function () {
-      Meteor.server.method_handlers['transactions.remove'].apply({ userId: 'testUserId1' }, ['testTransactionId1']);
+      Meteor.server.method_handlers['transactions.remove'].apply(
+        { userId: transactionOne.userId }, [transactionOne._id]);
 
-      expect(Transactions.findOne({ _id: 'testTransactionId1'})).toNotExist();
+      expect(Transactions.findOne({ _id: transactionOne._id})).toNotExist();
     });
 
     it('should not remove transaction if unauthenticated', function () {
       expect(() => {
-        Meteor.server.method_handlers['transactions.remove'].apply({}, ['testTransactionId1']);
+        Meteor.server.method_handlers['transactions.remove'].apply(
+          {}, [transactionOne._id]);
       }).toThrow();
     });
 
@@ -49,13 +57,13 @@ if (Meteor.isServer) {
       const isApproved = true;
 
       Meteor.server.method_handlers['transactions.update'].apply({
-        userId: 'testUserId1'
+        userId: transactionOne.userId
       }, [
-        'testTransactionId1',
+        transactionOne._id,
         { isApproved }
       ]);
 
-      const transaction = Transactions.findOne('testTransactionId1');
+      const transaction = Transactions.findOne(transactionOne._id);
 
       expect(transaction.isApproved).toBe(true);
     });
@@ -63,7 +71,7 @@ if (Meteor.isServer) {
     it('should not update transaction if unauthenticated', function () {
       expect(() => {
         Meteor.server.method_handlers['transactions.update'].apply({}, [
-          'testTransactionId1',
+          transactionOne._id,
           { isApproved: true }
         ]);
       }).toThrow();

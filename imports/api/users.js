@@ -1,6 +1,8 @@
+import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { Accounts } from 'meteor/accounts-base';
+
 
 export const validateNewUser = (user) => {
   const email = user.emails[0].address;
@@ -16,5 +18,9 @@ export const validateNewUser = (user) => {
 };
 
 if (Meteor.isServer) {
-  Accounts.validateNewUser(validateNewUser);  
+  Accounts.validateNewUser(validateNewUser);
+
+  Meteor.publish('allUsers', function () {
+    return Meteor.users.find({}, {fields: {emails: 1}});
+  });
 }
