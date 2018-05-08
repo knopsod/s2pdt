@@ -7,6 +7,9 @@ import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
 import Login from '../ui/Login';
 
+import UsersList from '../ui/UsersList';
+import TransactionsList from '../ui/TransactionsList';
+
 const unauthenticatedPages = ['/', '/signup'];
 const authenticatedPages = ['/dashboard'];
 const onEnterPublicPage = () => {
@@ -35,6 +38,8 @@ export const routes = (
     <Route path="/" component={Login} onEnter={onEnterPublicPage}/>
     <Route path="/signup" component={Signup} onEnter={onEnterPublicPage}/>
     <Route path="/dashboard" component={Dashboard} onEnter={onEnterPrivatePage}/>
+    <Route path="/users" component={UsersList} onEnter={onEnterPrivatePage}/>
+    <Route path="/transactions" component={TransactionsList} onEnter={onEnterPrivatePage}/>
     <Route path="*" component={NotFound}/>
   </Router>
 );
