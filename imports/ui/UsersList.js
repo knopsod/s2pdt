@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
@@ -21,6 +22,9 @@ class UsersList extends React.Component {
         <PrivateHeader title="Users"/>
         <div className="page-content">
           Users page content.
+          <div>
+            <button onClick={() => browserHistory.replace('/dashboard')}>Dashboard</button>
+          </div>
           <div>
             {this.renderUsers()}
           </div>

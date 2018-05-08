@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
@@ -35,6 +36,9 @@ class TransactionsList extends React.Component {
         <PrivateHeader title="Transactions"/>
         <div className="page-content">
           Transactions page content.
+          <div>
+            <button onClick={() => browserHistory.replace('/dashboard')}>Dashboard</button>
+          </div>
           <div>
             <button onClick={this.handleAddClick.bind(this)}>Add fake transactions</button>
           </div>
