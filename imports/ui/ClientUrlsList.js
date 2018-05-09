@@ -11,8 +11,14 @@ class ClientUrlsList extends React.Component {
   constructor(props) {
     super(props)
   }
-  handleAddClick() {
-    this.props.meteorCall('client_urls.insert', (err, res) => {});
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const url = this.refs.url.value;
+
+    this.props.meteorCall('client_urls.insert',
+      { url },
+      (err, res) => {});
   }
   renderClientUrls() {
     return (
@@ -30,7 +36,10 @@ class ClientUrlsList extends React.Component {
           <Nav />
           Client urls page content.
           <div>
-            <button onClick={this.handleAddClick.bind(this)}>Add fake url</button>
+            <form onSubmit={this.handleSubmit.bind(this)}>
+              <input type="text" ref="url" placeholder="https://" />
+              <input type="submit"/>
+            </form>
           </div>
           <div>
             {this.renderClientUrls()}

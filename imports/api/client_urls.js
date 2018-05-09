@@ -12,13 +12,15 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  'client_urls.insert'() {
+  'client_urls.insert'(client_url) {
     if (!this.userId) {
       throw new Meteor.Error('not-authorized');
     }
 
+    const { url } = client_url;
+
     return ClientUrls.insert({
-      url: '',
+      url,
       userId: this.userId,
       updatedAt: moment().valueOf()
     });

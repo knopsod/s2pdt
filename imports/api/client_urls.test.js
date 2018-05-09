@@ -18,7 +18,9 @@ if (Meteor.isServer) {
 
     it('should insert new client url', function () {
       const userId = 'testid';
-      const _id = Meteor.server.method_handlers['client_urls.insert'].apply({ userId });
+      const client_url = { url: 'https://www.google.com' }
+      const _id = Meteor.server.method_handlers['client_urls.insert'].apply(
+        { userId }, [client_url]);
 
       expect(ClientUrls.findOne({ _id, userId })).toExist();
     });
