@@ -12,7 +12,7 @@ import TransactionsList from '../ui/TransactionsList';
 import ClientUrlsList from '../ui/ClientUrlsList';
 
 const unauthenticatedPages = ['/', '/signup'];
-const authenticatedPages = ['/dashboard'];
+const authenticatedPages = ['/dashboard', '/users', '/transactions', '/client_urls'];
 const onEnterPublicPage = () => {
   if (Meteor.userId()) {
     browserHistory.replace('/dashboard');
