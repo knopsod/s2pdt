@@ -10,10 +10,16 @@ export default () => {
       <div className="page-content">
         Dashboard page content.
         <div>
-          <button onClick={() => browserHistory.replace('/users')}>Users list</button>
+          <button onClick={() => browserHistory.replace('/users')}>
+            Users list</button>
         </div>
         <div>
-          <button onClick={() => browserHistory.replace('/transactions')}>Transactions list</button>
+          <button onClick={() => browserHistory.replace('/transactions')}>
+            Transactions list</button>
+        </div>
+        <div>
+          <button onClick={() => browserHistory.replace('/client_urls')}>
+            Client url list</button>
         </div>
       </div>
     </div>

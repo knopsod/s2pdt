@@ -9,6 +9,7 @@ import Login from '../ui/Login';
 
 import UsersList from '../ui/UsersList';
 import TransactionsList from '../ui/TransactionsList';
+import ClientUrlsList from '../ui/ClientUrlsList';
 
 const unauthenticatedPages = ['/', '/signup'];
 const authenticatedPages = ['/dashboard'];
@@ -40,6 +41,7 @@ export const routes = (
     <Route path="/dashboard" component={Dashboard} onEnter={onEnterPrivatePage}/>
     <Route path="/users" component={UsersList} onEnter={onEnterPrivatePage}/>
     <Route path="/transactions" component={TransactionsList} onEnter={onEnterPrivatePage}/>
+    <Route path="/client_urls" component={ClientUrlsList} onEnter={onEnterPrivatePage}/>
     <Route path="*" component={NotFound}/>
   </Router>
 );

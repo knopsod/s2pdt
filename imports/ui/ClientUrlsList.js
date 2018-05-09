@@ -5,43 +5,37 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import PrivateHeader from './PrivateHeader';
 
-import { Transactions } from '../api/transactions';
+import { ClientUrls } from '../api/client_urls';
 
-class TransactionsList extends React.Component {
+class ClientUrlsList extends React.Component {
   constructor(props) {
     super(props)
   }
   handleAddClick() {
-    this.props.meteorCall('transactions.insert', (err, res) => {
-
-    });
+    this.props.meteorCall('client_urls.insert', (err, res) => {});
   }
-  renderTransaction() {
+  renderClientUrls() {
     return (
       <ul>
-        {this.props.transactions.map(tran =>
-          <li key={tran._id}>ID: {tran._id}, Approved: {
-            tran.isApproved?'Yes':'No'
-          }, updatedAt: {
-            tran.updatedAt
-          }</li>)}
+        {this.props.client_urls.map(cu =>
+          <li key={cu._id}>URL: {cu.url}</li>)}
       </ul>
     );
   }
   render() {
     return (
       <div>
-        <PrivateHeader title="Transactions"/>
+        <PrivateHeader title="Client urls"/>
         <div className="page-content">
-          Transactions page content.
+          Client urls page content.
           <div>
             <button onClick={() => browserHistory.replace('/dashboard')}>Dashboard</button>
           </div>
           <div>
-            <button onClick={this.handleAddClick.bind(this)}>Add fake transactions</button>
+            <button onClick={this.handleAddClick.bind(this)}>Add fake client urls</button>
           </div>
           <div>
-            {this.renderTransaction()}
+            {this.renderClientUrls()}
           </div>
         </div>
       </div>
@@ -50,10 +44,10 @@ class TransactionsList extends React.Component {
 };
 
 export default createContainer(() => {
-  Meteor.subscribe('transactions');
+  Meteor.subscribe('client_urls');
 
   return {
     meteorCall: Meteor.call,
-    transactions: Transactions.find().fetch()
+    client_urls: ClientUrls.find().fetch()
   };
-}, TransactionsList);
+}, ClientUrlsList);
