@@ -8,7 +8,7 @@ class UsersListItem extends React.Component {
   }
   handleRoleClick(_id, role) {
     this.props.meteorCall('users.role_update',
-      Meteor.userId(),
+      _id,
       { role },
       (err, res) => {
 
