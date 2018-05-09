@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import PrivateHeader from './PrivateHeader';
 import Nav from './Nav';
+import UsersListItem from './UsersListItem';
 
 class UsersList extends React.Component {
   constructor(props) {
@@ -12,8 +13,13 @@ class UsersList extends React.Component {
   renderUsers() {
     return (
       <ul>
-        {this.props.users.map(user =>
-          <li key={user._id}>{user.emails[0].address}</li>)}
+        {this.props.users.map((user) => {
+          // return <li key={user._id}>{user.emails[0].address}, role:
+          //   {(user.role === 1)?'admin':undefined}
+          //   {(user.role === 2)?'user':undefined}
+          //   {(user.role === 3)?'customer':undefined}</li>
+          return <UsersListItem key={user._id} user={user} />
+        })}
       </ul>
     );
   }
@@ -35,7 +41,6 @@ class UsersList extends React.Component {
 
 export default createContainer(() => {
   Meteor.subscribe('allUsers');
-  console.log(Meteor.users.find().fetch());
   return {
     users: Meteor.users.find().fetch()
   }

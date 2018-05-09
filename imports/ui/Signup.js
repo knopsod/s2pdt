@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from 'meteor/meteor';
 
 export default class Signup extends React.Component {
   constructor(props) {
@@ -24,6 +25,12 @@ export default class Signup extends React.Component {
         this.setState({error: err.reason});
       } else {
         this.setState({error: ''});
+        Meteor.call('users.role_update',
+          Meteor.userId(),
+          { role: 3 },
+          (err, res) => {
+            
+          });
       }
     });
   }
