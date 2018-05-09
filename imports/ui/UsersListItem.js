@@ -15,14 +15,18 @@ class UsersListItem extends React.Component {
       });
   }
   render() {
+
+    const user = this.props.user;
+
     return <li>
-      {this.props.user.emails[0].address}, role:
-      {(this.props.user.role === 1)?'admin':undefined}
-      {(this.props.user.role === 2)?'user':undefined}
-      {(this.props.user.role === 3)?'customer':undefined}
-      <button onClick={this.handleRoleClick.bind(this, this.props.user._id, 1)}>Admin</button>
-      <button onClick={this.handleRoleClick.bind(this, this.props.user._id, 2)}>User</button>
-      <button onClick={this.handleRoleClick.bind(this, this.props.user._id, 3)}>Customer</button>
+      <button onClick={this.handleRoleClick.bind(this, user._id, 1)}>Admin</button>
+      <button onClick={this.handleRoleClick.bind(this, user._id, 2)}>User</button>
+      <button onClick={this.handleRoleClick.bind(this, user._id, 3)}>Customer</button>
+      {user.emails[0].address},
+      role:
+        {(user.role === 1)?'admin':undefined}
+        {(user.role === 2)?'user':undefined}
+        {(user.role === 3)?'customer':undefined}
     </li>
   }
 }

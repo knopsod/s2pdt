@@ -55,6 +55,6 @@ export default createContainer(() => {
 
   return {
     meteorCall: Meteor.call,
-    client_urls: ClientUrls.find().fetch()
+    client_urls: ClientUrls.find({}).fetch()
   };
 }, ClientUrlsList);

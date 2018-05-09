@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import PrivateHeader from './PrivateHeader';
 import Nav from './Nav';
+import TransactionsListItem from './TransactionsListItem';
 
 import { Transactions } from '../api/transactions';
 
@@ -19,12 +20,9 @@ class TransactionsList extends React.Component {
   renderTransaction() {
     return (
       <ul>
-        {this.props.transactions.map(tran =>
-          <li key={tran._id}>ID: {tran._id}, Approved: {
-            tran.isApproved?'Yes':'No'
-          }, updatedAt: {
-            tran.updatedAt
-          }</li>)}
+        {this.props.transactions.map((tran) => {
+          return <TransactionsListItem key={tran._id} tran={tran} />
+        })}
       </ul>
     );
   }
@@ -52,6 +50,6 @@ export default createContainer(() => {
 
   return {
     meteorCall: Meteor.call,
-    transactions: Transactions.find().fetch()
+    transactions: Transactions.find({}, { sort: { isApproved: 1, createdAt: 1 } }).fetch()
   };
 }, TransactionsList);

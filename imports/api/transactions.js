@@ -20,6 +20,7 @@ Meteor.methods({
     return Transactions.insert({
       isApproved: false,
       userId: this.userId,
+      createdAt: moment().valueOf(),
       updatedAt: moment().valueOf()
     });
   },

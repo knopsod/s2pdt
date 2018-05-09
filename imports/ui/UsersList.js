@@ -14,10 +14,6 @@ class UsersList extends React.Component {
     return (
       <ul>
         {this.props.users.map((user) => {
-          // return <li key={user._id}>{user.emails[0].address}, role:
-          //   {(user.role === 1)?'admin':undefined}
-          //   {(user.role === 2)?'user':undefined}
-          //   {(user.role === 3)?'customer':undefined}</li>
           return <UsersListItem key={user._id} user={user} />
         })}
       </ul>
