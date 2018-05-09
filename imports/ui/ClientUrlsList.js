@@ -1,9 +1,9 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import PrivateHeader from './PrivateHeader';
+import Nav from './Nav';
 
 import { ClientUrls } from '../api/client_urls';
 
@@ -27,12 +27,10 @@ class ClientUrlsList extends React.Component {
       <div>
         <PrivateHeader title="Client urls"/>
         <div className="page-content">
+          <Nav />
           Client urls page content.
           <div>
-            <button onClick={() => browserHistory.replace('/dashboard')}>Dashboard</button>
-          </div>
-          <div>
-            <button onClick={this.handleAddClick.bind(this)}>Add fake client urls</button>
+            <button onClick={this.handleAddClick.bind(this)}>Add fake url</button>
           </div>
           <div>
             {this.renderClientUrls()}

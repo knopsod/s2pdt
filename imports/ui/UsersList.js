@@ -1,9 +1,9 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import PrivateHeader from './PrivateHeader';
+import Nav from './Nav';
 
 class UsersList extends React.Component {
   constructor(props) {
@@ -22,10 +22,8 @@ class UsersList extends React.Component {
       <div>
         <PrivateHeader title="Users"/>
         <div className="page-content">
+          <Nav />
           Users page content.
-          <div>
-            <button onClick={() => browserHistory.replace('/dashboard')}>Dashboard</button>
-          </div>
           <div>
             {this.renderUsers()}
           </div>
