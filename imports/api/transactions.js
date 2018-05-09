@@ -6,8 +6,8 @@ import SimpleSchema from 'simpl-schema';
 export const Transactions = new Mongo.Collection('transactions');
 
 if (Meteor.isServer) {
-  Meteor.publish('transactions', function () {
-    return Transactions.find({})
+  Meteor.publish('transactions', function (per_page) {
+    return Transactions.find({}, { limit: per_page })
   });
 }
 

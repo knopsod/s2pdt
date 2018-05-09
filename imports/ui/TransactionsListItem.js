@@ -25,7 +25,6 @@ class TransactionsListItem extends React.Component {
       </button>
       Approved: { tran.isApproved?'Yes':'No' },
       ID: {tran._id},
-      createdAt: { tran.createdAt },
       updatedAt: { tran.updatedAt }
     </li>
   }

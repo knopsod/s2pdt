@@ -8,14 +8,23 @@ import TransactionsListItem from './TransactionsListItem';
 
 import { Transactions } from '../api/transactions';
 
+const PER_PAGE = 20;
+
 class TransactionsList extends React.Component {
   constructor(props) {
     super(props)
+  }
+  componentWillMount() {
+    this.page = 1;
   }
   handleAddClick() {
     this.props.meteorCall('transactions.insert', (err, res) => {
 
     });
+  }
+  handleMoreClick() {
+    Meteor.subscribe('transactions', PER_PAGE * (this.page + 1));
+    this.page += 1;
   }
   renderTransaction() {
     return (
@@ -39,6 +48,7 @@ class TransactionsList extends React.Component {
           <div>
             {this.renderTransaction()}
           </div>
+          <button onClick={this.handleMoreClick.bind(this)}>More..</button>
         </div>
       </div>
     );
@@ -46,10 +56,10 @@ class TransactionsList extends React.Component {
 };
 
 export default createContainer(() => {
-  Meteor.subscribe('transactions');
+  Meteor.subscribe('transactions', PER_PAGE);
 
   return {
     meteorCall: Meteor.call,
-    transactions: Transactions.find({}, { sort: { isApproved: 1, createdAt: 1 } }).fetch()
+    transactions: Transactions.find({}, { sort: { isApproved: 1, updatedAt: -1 } }).fetch()
   };
 }, TransactionsList);
