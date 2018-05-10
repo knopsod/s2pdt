@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
@@ -24,7 +25,10 @@ class ClientUrlsList extends React.Component {
     return (
       <ul>
         {this.props.client_urls.map(cu =>
-          <li key={cu._id}>URL: {cu.url}</li>)}
+          <li key={cu._id}>
+            <button onClick={() => browserHistory.replace('/url_setup')}>Setup</button>
+            URL: {cu.url}
+          </li>)}
       </ul>
     );
   }
