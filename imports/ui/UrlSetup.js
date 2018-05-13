@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import PrivateHeader from './PrivateHeader';
@@ -43,6 +44,9 @@ class UrlSetup extends React.Component {
         <div className="page-content">
           <Nav />
           Setting URL page content.
+          <div>
+            <button onClick={() => browserHistory.replace('/client_urls')}>&lt;Back</button>
+          </div>
           <div>
             URL : {this.state.url !== '' ? this.state.url : undefined}
           </div>
