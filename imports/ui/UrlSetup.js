@@ -24,9 +24,6 @@ class UrlSetup extends React.Component {
     }
   }
   handleSelectClick(user) {
-    console.log(this.state);
-    console.log(user);
-
     const _id = this.state._id;
     const approver = user.emails[0].address;
 
@@ -71,7 +68,7 @@ export default createContainer(() => {
 
   return {
     client_url: ClientUrls.findOne(selectedClientUrlId),
-    users: Meteor.users.find({ role: 2}).fetch(),
+    users: Meteor.users.find({ role: 2 }).fetch(),
     meteorCall: Meteor.call
   }
 }, UrlSetup)
