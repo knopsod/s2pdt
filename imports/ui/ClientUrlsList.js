@@ -1,33 +1,44 @@
 import React from 'react';
 import FlipMove from 'react-flip-move';
-import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Session } from 'meteor/session';
 
 import PrivateHeader from './PrivateHeader';
 import Nav from './Nav';
+import ClientUrlsListItem from './ClientUrlsListItem';
 
 import { ClientUrls } from '../api/client_urls';
 
 class ClientUrlsList extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+
+    this.state = {
+      error: ''
+    };
   }
   handleSubmit(e) {
     e.preventDefault();
 
     const url = this.refs.url.value;
+    const approver = '';
 
     this.props.meteorCall('client_urls.insert',
-      { url },
-      (err, res) => {});
+      { url, approver },
+      (err, res) => {
+        if(err) {
+          this.setState({error: err.reason});
+        } else {
+          this.setState({error: ''});
+        }
+      });
+
+    this.refs.url.value = '';
   }
   renderClientUrls() {
     return this.props.client_urls.map(function (cu) {
-      return <div key={cu._id}>
-        <button onClick={() => browserHistory.replace('/url_setup')}>Setup</button>
-        URL: {cu.url}
-      </div>;
+      return <ClientUrlsListItem key={cu._id} client_url={cu}/>
     });
   }
   render() {
@@ -38,8 +49,10 @@ class ClientUrlsList extends React.Component {
           <Nav />
           Client urls page content.
           <div>
+            { this.state.error !== '' ? this.state.error : undefined }
             <form onSubmit={this.handleSubmit.bind(this)}>
-              <input type="text" ref="url" placeholder="https://" />
+              <input type="text" ref="url"
+                placeholder="http://example_client_url.com" />
               <input type="submit"/>
             </form>
           </div>
@@ -57,6 +70,7 @@ export default createContainer(() => {
 
   return {
     meteorCall: Meteor.call,
-    client_urls: ClientUrls.find({}).fetch()
+    client_urls: ClientUrls.find({}).fetch(),
+    Session
   };
 }, ClientUrlsList);

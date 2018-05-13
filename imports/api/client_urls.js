@@ -60,6 +60,10 @@ Meteor.methods({
         type: String,
         optional: true,
         regEx: SimpleSchema.RegEx.Url
+      },
+      approver: {
+        type: String,
+        optional: true
       }
     }).validate({
       _id,

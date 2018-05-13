@@ -34,6 +34,7 @@ class UsersList extends React.Component {
 
 export default createContainer(() => {
   Meteor.subscribe('allUsers');
+
   return {
     users: Meteor.users.find({}, { sort: { role: 1 } }).fetch()
   }
