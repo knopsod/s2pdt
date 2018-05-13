@@ -8,19 +8,7 @@ class UrlSetup extends React.Component {
   constructor(props) {
     super(props)
   }
-  renderUsers() {
-    return (
-      <ul>
-        {this.props.users.map((user) => {
-          return <div key={user._id}>
-            <button>User</button>
-            <button>Customer</button>
-            {user.emails[0].address}
-          </div>
-        })}
-      </ul>
-    );
-  }
+
   render() {
     return (
       <div>
@@ -29,7 +17,7 @@ class UrlSetup extends React.Component {
           <Nav />
           Setting URL page content.
           <div>
-            {this.renderUsers()}
+
           </div>
         </div>
       </div>
@@ -38,8 +26,7 @@ class UrlSetup extends React.Component {
 }
 
 export default createContainer(() => {
-  Meteor.subscribe('allUsers');
   return {
-    users: Meteor.users.find({}, { sort: { role: 1 } }).fetch()
+    client_url: {}
   }
 }, UrlSetup)

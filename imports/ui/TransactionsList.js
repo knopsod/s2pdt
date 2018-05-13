@@ -28,13 +28,9 @@ class TransactionsList extends React.Component {
     this.page += 1;
   }
   renderTransaction() {
-    return (
-      <ul>
-        {this.props.transactions.map((tran) => {
-          return <TransactionsListItem key={tran._id} tran={tran} />
-        })}
-      </ul>
-    );
+    return this.props.transactions.map((tran) => {
+      return <TransactionsListItem key={tran._id} tran={tran} />
+    });
   }
   render() {
     return (
@@ -46,11 +42,9 @@ class TransactionsList extends React.Component {
           <div>
             <button onClick={this.handleAddClick.bind(this)}>Add fake transaction</button>
           </div>
-          <div>
-            <FlipMove maintainContainerHeight={true}>
-              {this.renderTransaction()}
-            </FlipMove>
-          </div>
+          <FlipMove maintainContainerHeight={true}>
+            {this.renderTransaction()}
+          </FlipMove>
           <button onClick={this.handleMoreClick.bind(this)}>More..</button>
         </div>
       </div>

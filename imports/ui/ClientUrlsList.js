@@ -1,4 +1,5 @@
 import React from 'react';
+import FlipMove from 'react-flip-move';
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -22,15 +23,12 @@ class ClientUrlsList extends React.Component {
       (err, res) => {});
   }
   renderClientUrls() {
-    return (
-      <ul>
-        {this.props.client_urls.map(cu =>
-          <li key={cu._id}>
-            <button onClick={() => browserHistory.replace('/url_setup')}>Setup</button>
-            URL: {cu.url}
-          </li>)}
-      </ul>
-    );
+    return this.props.client_urls.map(function (cu) {
+      return <div key={cu._id}>
+        <button onClick={() => browserHistory.replace('/url_setup')}>Setup</button>
+        URL: {cu.url}
+      </div>;
+    });
   }
   render() {
     return (
@@ -45,9 +43,9 @@ class ClientUrlsList extends React.Component {
               <input type="submit"/>
             </form>
           </div>
-          <div>
+          <FlipMove maintainContainerHeight={true}>
             {this.renderClientUrls()}
-          </div>
+          </FlipMove>
         </div>
       </div>
     );

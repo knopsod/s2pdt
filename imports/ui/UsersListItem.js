@@ -18,7 +18,7 @@ class UsersListItem extends React.Component {
 
     const user = this.props.user;
 
-    return <li>
+    return <div>
       <button onClick={this.handleRoleClick.bind(this, user._id, 1)}>Admin</button>
       <button onClick={this.handleRoleClick.bind(this, user._id, 2)}>User</button>
       <button onClick={this.handleRoleClick.bind(this, user._id, 3)}>Customer</button>
@@ -27,7 +27,7 @@ class UsersListItem extends React.Component {
         {(user.role === 1)?'admin':undefined}
         {(user.role === 2)?'user':undefined}
         {(user.role === 3)?'customer':undefined}
-    </li>
+    </div>
   }
 }
 

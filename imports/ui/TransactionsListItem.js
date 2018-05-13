@@ -19,14 +19,14 @@ class TransactionsListItem extends React.Component {
 
     const tran = this.props.tran;
 
-    return <li>
+    return <div>
       <button onClick={this.handleApproveClick.bind(this, tran._id, tran.isApproved)}>
         Approve
       </button>
       Approved: { tran.isApproved?'Yes':'No' },
       ID: {tran._id},
       updatedAt: { tran.updatedAt }
-    </li>
+    </div>
   }
 }
 

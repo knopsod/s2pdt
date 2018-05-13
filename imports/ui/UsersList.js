@@ -1,4 +1,5 @@
 import React from 'react';
+import FlipMove from 'react-flip-move';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
@@ -11,13 +12,9 @@ class UsersList extends React.Component {
     super(props)
   }
   renderUsers() {
-    return (
-      <ul>
-        {this.props.users.map((user) => {
-          return <UsersListItem key={user._id} user={user} />
-        })}
-      </ul>
-    );
+    return this.props.users.map(function (user) {
+      return <UsersListItem key={user._id} user={user} />
+    });
   }
   render() {
     return (
@@ -26,9 +23,9 @@ class UsersList extends React.Component {
         <div className="page-content">
           <Nav />
           Users page content.
-          <div>
+          <FlipMove maintainContainerHeight={true}>
             {this.renderUsers()}
-          </div>
+          </FlipMove>
         </div>
       </div>
     );
