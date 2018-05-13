@@ -1,4 +1,5 @@
 import React from 'react';
+import FlipMove from 'react-flip-move';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
@@ -46,7 +47,9 @@ class TransactionsList extends React.Component {
             <button onClick={this.handleAddClick.bind(this)}>Add fake transaction</button>
           </div>
           <div>
-            {this.renderTransaction()}
+            <FlipMove maintainContainerHeight={true}>
+              {this.renderTransaction()}
+            </FlipMove>
           </div>
           <button onClick={this.handleMoreClick.bind(this)}>More..</button>
         </div>
