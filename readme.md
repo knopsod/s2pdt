@@ -28,3 +28,42 @@ npm test
 ```
 
 And open `http://localhost:3000/` in your browser.
+
+### REST API Instructions
+#### Client
+Client use RESTful POST method and send data
+```
+{
+    client_url: "http://example.com",
+    client_rest_api_endpoint: "https://example.com/api/transactions", // optional data if not provide, use default data that set in Shop2Pay
+    client_transaction_id: "abcd1234", // ref. internal id of client web
+    bank_account: "John Doe",
+    bank_no: "999-9-9999-9",
+    bank_name: "kasikorn",
+    transfer_datetime: "2018-01-01 10:00:00",
+    is_approved: "false"
+}
+```
+to Shop2Pay endpoint
+```
+POST http://shop2pay_dev_test.herokuapp.com/api/transactions
+```
+#### Shop2Pay
+Shop2Pay use RESTful POST method and send data
+```
+{
+    client_url: "http://example.com",
+    client_rest_api_endpoint: "https://example.com/api/transactions", // optional data if not provide, use default data that set in Shop2Pay
+    client_transaction_id: "abcd1234", // ref. internal id of client web
+    bank_account: "John Doe",
+    bank_no: "999-9-9999-9",
+    bank_name: "kasikorn",
+    transfer_datetime: "2018-01-01 10:00:00",
+    is_approved: "true",
+    approved_datetime: "2018-01-01 11:00:00"
+}
+```
+to client endpoint
+```
+POST http://example.com/api/transactions
+```
