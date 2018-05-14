@@ -13,6 +13,7 @@ class UrlSetup extends React.Component {
     super(props);
 
     this.state = {
+      error: '',
       _id: '',
       url: '',
       endpoint: '',
@@ -35,7 +36,10 @@ class UrlSetup extends React.Component {
       _id,
       { url },
       (err, res) => {
-        if(!err) {
+        if(err) {
+          this.setState({error: err.reason});
+        } else {
+          this.setState({error: ''});
         }
       });
   }
@@ -47,7 +51,10 @@ class UrlSetup extends React.Component {
       _id,
       { endpoint },
       (err, res) => {
-        if(!err) {
+        if(err) {
+          this.setState({error: err.reason});
+        } else {
+          this.setState({error: ''});
         }
       });
   }
@@ -86,6 +93,9 @@ class UrlSetup extends React.Component {
           Setting URL page content.
           <div>
             <button onClick={() => browserHistory.replace('/client_urls')}>&lt;Back</button>
+          </div>
+          <div>
+            { this.state.error !== '' ? this.state.error : undefined }
           </div>
           <div>
             URL :
