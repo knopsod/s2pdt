@@ -31,7 +31,11 @@ And open `http://localhost:3000/` in your browser.
 
 ### REST API Instructions
 #### Client
-Client use RESTful POST method and send data
+Client use RESTful POST method to Shop2Pay endpoint
+```
+POST http://shop2pay_dev_test.herokuapp.com/api/transactions
+```
+and send data
 ```
 {
     client_url: "http://example.com",
@@ -44,12 +48,13 @@ Client use RESTful POST method and send data
     is_approved: "false"
 }
 ```
-to Shop2Pay endpoint
-```
-POST http://shop2pay_dev_test.herokuapp.com/api/transactions
-```
+
 #### Shop2Pay
-Shop2Pay use RESTful POST method and send data
+Shop2Pay use RESTful POST method to client endpoint
+```
+POST http://example.com/api/transactions
+```
+and send data
 ```
 {
     client_url: "http://example.com",
@@ -62,8 +67,4 @@ Shop2Pay use RESTful POST method and send data
     is_approved: "true",
     approved_datetime: "2018-01-01 11:00:00"
 }
-```
-to client endpoint
-```
-POST http://example.com/api/transactions
 ```
