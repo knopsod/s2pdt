@@ -15,7 +15,7 @@ class ClientUrlsListItem extends React.Component {
   render() {
     return <div>
       <button onClick={this.handleUrlSetupClick.bind(this)}>
-        Setup
+        Setting
       </button>
       URL: {this.props.client_url.url},
       Owner: {this.props.client_url.owner},
