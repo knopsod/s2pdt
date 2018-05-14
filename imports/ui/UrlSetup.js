@@ -1,6 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
+import FlipMove from 'react-flip-move';
 
 import PrivateHeader from './PrivateHeader';
 import Nav from './Nav';
@@ -14,6 +15,8 @@ class UrlSetup extends React.Component {
     this.state = {
       _id: '',
       url: '',
+      endpoint: '',
+      owner: '',
       approver: ''
     };
   }
@@ -24,7 +27,44 @@ class UrlSetup extends React.Component {
       });
     }
   }
-  handleSelectClick(user) {
+  handleUrlChange(e) {
+    const _id = this.state._id;
+    const url = e.target.value;
+    this.setState({ url });
+    this.props.meteorCall('client_urls.update',
+      _id,
+      { url },
+      (err, res) => {
+        if(!err) {
+        }
+      });
+  }
+  handleEndpointChange(e) {
+    const _id = this.state._id;
+    const endpoint = e.target.value;
+    this.setState({ endpoint });
+    this.props.meteorCall('client_urls.update',
+      _id,
+      { endpoint },
+      (err, res) => {
+        if(!err) {
+        }
+      });
+  }
+  handleSetAsOwnerClick(user) {
+    const _id = this.state._id;
+    const owner = user.emails[0].address;
+
+    this.props.meteorCall('client_urls.update',
+      _id,
+      { owner },
+      (err, res) => {
+        if(!err) {
+          this.setState({ owner });
+        }
+      });
+  }
+  handleSetAsApproverClick(user) {
     const _id = this.state._id;
     const approver = user.emails[0].address;
 
@@ -33,7 +73,7 @@ class UrlSetup extends React.Component {
       { approver },
       (err, res) => {
         if(!err) {
-          this.setState({approver});
+          this.setState({ approver });
         }
       });
   }
@@ -48,18 +88,32 @@ class UrlSetup extends React.Component {
             <button onClick={() => browserHistory.replace('/client_urls')}>&lt;Back</button>
           </div>
           <div>
-            URL : {this.state.url !== '' ? this.state.url : undefined}
+            URL :
+            <input value={this.state.url}
+              placeholder="http://example.com"
+              onChange={this.handleUrlChange.bind(this)}/>
           </div>
           <div>
-            Approver : {this.state.approver !== '' ? this.state.approver : undefined}
+            Endpoint :
+            <input value={this.state.endpoint}
+              placeholder="http://example.com/api/transactions"
+              onChange={this.handleEndpointChange.bind(this)}/>
           </div>
           <div>
+            Owner : {this.state.owner}
+          </div>
+          <div>
+            Approver : {this.state.approver}
+          </div>
+          <FlipMove maintainContainerHeight={true}>
             {this.props.users.map((user) => {
               return <div key={user._id}>
-                <button onClick={this.handleSelectClick.bind(this, user)}>Select</button>{user.emails[0].address}
+                <button onClick={this.handleSetAsOwnerClick.bind(this, user)}>Set as owner</button>
+                <button onClick={this.handleSetAsApproverClick.bind(this, user)}>Set as approver</button>
+                {user.emails[0].address}
               </div>
             })}
-          </div>
+          </FlipMove>
         </div>
       </div>
     );

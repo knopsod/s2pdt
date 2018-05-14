@@ -61,6 +61,15 @@ Meteor.methods({
         optional: true,
         regEx: SimpleSchema.RegEx.Url
       },
+      endpoint: {
+        type: String,
+        optional: true,
+        regEx: SimpleSchema.RegEx.Url
+      },
+      owner: {
+        type: String,
+        optional: true
+      },
       approver: {
         type: String,
         optional: true

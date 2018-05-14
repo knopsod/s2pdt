@@ -22,10 +22,12 @@ class ClientUrlsList extends React.Component {
     e.preventDefault();
 
     const url = this.refs.url.value;
+    const endpoint = '';
+    const owner = '';
     const approver = '';
 
     this.props.meteorCall('client_urls.insert',
-      { url, approver },
+      { url, endpoint, owner, approver },
       (err, res) => {
         if(err) {
           this.setState({error: err.reason});
@@ -51,8 +53,8 @@ class ClientUrlsList extends React.Component {
           <div>
             { this.state.error !== '' ? this.state.error : undefined }
             <form onSubmit={this.handleSubmit.bind(this)}>
-              <input type="text" ref="url"
-                placeholder="http://example_client_url.com" />
+              <input ref="url"
+                placeholder="http://example.com" />
               <input type="submit"/>
             </form>
           </div>
