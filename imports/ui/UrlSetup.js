@@ -104,7 +104,7 @@ class UrlSetup extends React.Component {
               onChange={this.handleUrlChange.bind(this)}/>
           </div>
           <div>
-            Endpoint :
+            Default REST API endpoint :
             <input value={this.state.endpoint}
               placeholder="http://example.com/api/transactions"
               onChange={this.handleEndpointChange.bind(this)}/>
