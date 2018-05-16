@@ -13,6 +13,7 @@ if (Meteor.isServer) {
   });
 
   // Ref. https://forums.meteor.com/t/meteor-webapp-vs-picker-vs-simple-rest-for-rest-api/34034
+  // Ref. https://hashnode.com/post/web-api-using-meteor-webapp-ciqgn0ukj0irtdd53uy12h6ia
   WebApp.connectHandlers.use('/api/transactions', (req, res, next) => {
     console.log('req.method:', req.method);
     console.log('req.query:', req.query);
@@ -55,7 +56,7 @@ if (Meteor.isServer) {
         res.writeHead(201); // 201 Created
         res.end();
       } else {
-        res.writeHead(406); // 406 Created
+        res.writeHead(503); // 503 Service Unavailable
         res.end();
       }
 

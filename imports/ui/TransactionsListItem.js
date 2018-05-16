@@ -30,7 +30,7 @@ class TransactionsListItem extends React.Component {
       { tran.bank_no },
       { tran.bank_short_name },
       { tran.amount } BHT.,
-      Unix time:{ tran.updatedAt }
+      { tran.transferred_datetime }
     </div>
   }
 }
