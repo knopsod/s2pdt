@@ -136,7 +136,7 @@ export default createContainer(() => {
 
   return {
     client_url: ClientUrls.findOne(selectedClientUrlId),
-    users: Meteor.users.find({ role: 2 }).fetch(),
+    users: Meteor.users.find({ role: { $ne: 1 } }).fetch(),
     meteorCall: Meteor.call
   }
 }, UrlSetup)
