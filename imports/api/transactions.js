@@ -45,7 +45,7 @@ if (Meteor.isServer) {
             bank_short_name,
             amount,
             transferred_datetime,
-            isApproved: is_approved,
+            isApproved: false,
             userId: this.userId,
             createdAt: moment().valueOf(),
             updatedAt: moment().valueOf()
