@@ -28,7 +28,8 @@ if (Meteor.isServer) {
           bank_no,
           bank_name,
           bank_short_name,
-          transfer_datetime,
+          amount,
+          transferred_datetime,
           is_approved
       } = req.query;
 
@@ -41,11 +42,15 @@ if (Meteor.isServer) {
             bank_no,
             bank_name,
             bank_short_name,
-            transfer_datetime,
-            is_approved
+            amount,
+            transferred_datetime,
+            isApproved: is_approved,
+            userId: this.userId,
+            createdAt: moment().valueOf(),
+            updatedAt: moment().valueOf()
         }
       );
-      
+
       if(_id) {
         res.writeHead(201); // 201 Created
         res.end();

@@ -18,11 +18,6 @@ class TransactionsList extends React.Component {
   componentWillMount() {
     this.page = 1;
   }
-  handleAddClick() {
-    this.props.meteorCall('transactions.insert', (err, res) => {
-
-    });
-  }
   handleMoreClick() {
     Meteor.subscribe('transactions', PER_PAGE * (this.page + 1));
     this.page += 1;
@@ -39,9 +34,7 @@ class TransactionsList extends React.Component {
         <div className="page-content">
           <Nav />
           Transactions page content.
-          <div>
-            <button onClick={this.handleAddClick.bind(this)}>Add fake transaction</button>
-          </div>
+
           <FlipMove maintainContainerHeight={true}>
             {this.renderTransaction()}
           </FlipMove>

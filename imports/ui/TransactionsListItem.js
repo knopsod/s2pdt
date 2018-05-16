@@ -21,11 +21,16 @@ class TransactionsListItem extends React.Component {
 
     return <div>
       <button onClick={this.handleApproveClick.bind(this, tran._id, tran.isApproved)}>
-        Approve
+        Approved
       </button>
-      Approved: { tran.isApproved?'Yes':'No' },
-      ID: {tran._id},
-      updatedAt: { tran.updatedAt }
+      { tran.isApproved?'Yes':'No' },
+      {tran.client_url},
+      Trans. ID: { tran.client_transaction_id },
+      { tran.bank_account },
+      { tran.bank_no },
+      { tran.bank_short_name },
+      { tran.amount } BHT.,
+      Unix time:{ tran.updatedAt }
     </div>
   }
 }
