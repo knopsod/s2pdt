@@ -132,7 +132,14 @@ Meteor.methods({
               is_approved: true
             }
           }, (error, response) => {
-            
+            if (error) {
+              Transactions.update(_id, {
+                $set: {
+                  updatedAt: moment().valueOf(),
+                  isApproved: false
+                }
+              });
+            }
           });
         return true;
       } catch (e) {
