@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
+import _ from 'lodash';
 
 import Signup from '../ui/Signup';
 import Dashboard from '../ui/Dashboard';
@@ -22,6 +23,18 @@ const onEnterPublicPage = () => {
 const onEnterPrivatePage = () => {
   if (!Meteor.userId()) {
     browserHistory.replace('/');
+  } else {
+    const pathname = browserHistory.getCurrentLocation().pathname;
+
+    setTimeout(function () {
+      const user = Meteor.user();
+      console.log('routes settimeout const user: ', user);
+      console.log('routes pathname: ', pathname);
+
+      if ( user.role !== 1 && ['/users', '/client_urls'].includes(pathname)) {
+        browserHistory.replace('/transactions');
+      }
+    }, 256);
   }
 };
 export const onAuthChange = (isAuthenticated) => {
