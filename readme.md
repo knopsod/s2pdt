@@ -72,3 +72,6 @@ and send data
     approved_datetime: "2018-01-01 11:00:00"
 }
 ```
+### Meteor Deployment
+#### Heroku
+- [Meteor Buildpack Horse](https://github.com/AdmitHub/meteor-buildpack-horse)
