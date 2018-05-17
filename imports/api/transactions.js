@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { WebApp } from 'meteor/webapp';
 import moment from 'moment';
 import SimpleSchema from 'simpl-schema';
+import { HTTP } from 'meteor/http';
 
 export const Transactions = new Mongo.Collection('transactions');
 // const app = express();
@@ -15,8 +16,6 @@ if (Meteor.isServer) {
   // Ref. https://forums.meteor.com/t/meteor-webapp-vs-picker-vs-simple-rest-for-rest-api/34034
   // Ref. https://hashnode.com/post/web-api-using-meteor-webapp-ciqgn0ukj0irtdd53uy12h6ia
   WebApp.connectHandlers.use('/api/transactions', (req, res, next) => {
-    console.log('req.method:', req.method);
-    console.log('req.query:', req.query);
     res.setHeader('Content-Type', 'application/json');
 
     if(req.method === 'POST') {
@@ -113,11 +112,33 @@ Meteor.methods({
       ...updates
     });
 
-    Transactions.update(_id, {
+    const result = Transactions.update(_id, {
       $set: {
         updatedAt: moment().valueOf(),
         ...updates
       }
-    })
+    });
+
+    if (result) {
+      const tran = Transactions.findOne(_id);
+      console.log(tran);
+      try {
+        // https://docs.meteor.com/api/http.html
+        // https://themeteorchef.com/tutorials/using-the-http-package
+        // https://www.tutorialspoint.com/meteor/meteor_http.htm
+        HTTP.call( 'POST', tran.client_rest_api_endpoint, {
+            data: {
+              ...tran,
+              is_approved: true
+            }
+          }, (error, response) => {
+            
+          });
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
   }
+
 });

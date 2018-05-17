@@ -1,7 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
-import { HTTP } from 'meteor/http';
 
 class TransactionsListItem extends React.Component {
   constructor(props) {
@@ -13,23 +12,7 @@ class TransactionsListItem extends React.Component {
       _id,
       { isApproved },
       (err, res) => {
-        if(!err) {
-          // https://docs.meteor.com/api/http.html
-          // https://themeteorchef.com/tutorials/using-the-http-package
-          // https://www.tutorialspoint.com/meteor/meteor_http.htm
-          HTTP.call( 'POST', this.props.tran.client_rest_api_endpoint, {
-            data: {
-              ...this.props.tran,
-              is_approved: true
-            }
-          }, function( error, response ) {
-            if ( error ) {
-              console.log( error );
-            } else {
-              console.log( response );
-            }
-          });
-        }
+
       });
   }
   render() {
