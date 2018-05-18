@@ -10,10 +10,17 @@ export const Transactions = new Mongo.Collection('transactions');
 
 if (Meteor.isServer) {
   Meteor.publish('transactions', function (perPage) {
-    console.log('this.userId:', this.userId, ', role:', Meteor.users.findOne(this.userId).role,
-      ', email:', Meteor.users.findOne(this.userId).emails[0].address
-    );
-    return Transactions.find({}, { limit: perPage })
+
+    const role = Meteor.users.findOne(this.userId).role;
+    const email = Meteor.users.findOne(this.userId).emails[0].address;
+
+    if (role === 1) {
+      return Transactions.find({}, { limit: perPage });
+    } else if (role === 2) {
+      return Transactions.find({ approver: role }, { limit: perPage });
+    } else if (role === 3) {
+      return Transactions.find({ owner: role }, { limit: perPage });
+    }
   });
 
   // Ref. https://forums.meteor.com/t/meteor-webapp-vs-picker-vs-simple-rest-for-rest-api/34034
