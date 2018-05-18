@@ -10,6 +10,9 @@ export const Transactions = new Mongo.Collection('transactions');
 
 if (Meteor.isServer) {
   Meteor.publish('transactions', function (perPage) {
+    console.log('this.userId:', this.userId, ', role:', Meteor.users.findOne(this.userId).role,
+      ', email:', Meteor.users.findOne(this.userId).emails[0].address
+    );
     return Transactions.find({}, { limit: perPage })
   });
 
@@ -121,7 +124,6 @@ Meteor.methods({
 
     if (result) {
       const tran = Transactions.findOne(_id);
-      console.log(tran);
       try {
         // https://docs.meteor.com/api/http.html
         // https://themeteorchef.com/tutorials/using-the-http-package

@@ -20,9 +20,9 @@ class TransactionsListItem extends React.Component {
     const tran = this.props.tran;
 
     return <div>
-      <button onClick={this.handleApproveClick.bind(this, tran._id, tran.isApproved)}>
+      { this.props.isShowButton && <button onClick={this.handleApproveClick.bind(this, tran._id, tran.isApproved)}>
         Approved
-      </button>
+      </button> }
       { tran.isApproved?'Yes':'No' },
       {tran.client_url},
       Trans. ID: { tran.client_transaction_id },

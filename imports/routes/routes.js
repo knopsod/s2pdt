@@ -28,13 +28,11 @@ const onEnterPrivatePage = () => {
 
     setTimeout(function () {
       const user = Meteor.user();
-      console.log('routes settimeout const user: ', user);
-      console.log('routes pathname: ', pathname);
 
       if ( user.role !== 1 && ['/users', '/client_urls'].includes(pathname)) {
-        browserHistory.replace('/transactions');
+        browserHistory.replace('/dashboard');
       }
-    }, 256);
+    }, 500);
   }
 };
 export const onAuthChange = (isAuthenticated) => {

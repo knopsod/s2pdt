@@ -2,6 +2,7 @@ import React from 'react';
 import FlipMove from 'react-flip-move';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import _ from 'lodash';
 
 import PrivateHeader from './PrivateHeader';
 import Nav from './Nav';
@@ -23,8 +24,16 @@ class TransactionsList extends React.Component {
     this.page += 1;
   }
   renderTransaction() {
+    console.log('this.props.user: ', this.props.user);
+    var isShowButton = false;
+    if (this.props.user) {
+      if ( _.has(this.props.user, 'role') ) {
+        isShowButton = this.props.user.role !== 3;
+        console.log('isShowButton:', isShowButton);
+      }
+    }
     return this.props.transactions.map((tran) => {
-      return <TransactionsListItem key={tran._id} tran={tran} />
+      return <TransactionsListItem key={tran._id} tran={tran} isShowButton={isShowButton} />
     });
   }
   render() {
@@ -49,6 +58,7 @@ export default createContainer(() => {
   Meteor.subscribe('transactions', PER_PAGE);
 
   return {
+    user: Meteor.user(),
     meteorCall: Meteor.call,
     transactions: Transactions.find({}, { sort: { isApproved: 1, updatedAt: -1 } }).fetch()
   };
