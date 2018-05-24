@@ -49,10 +49,10 @@ class ClientUrlsList extends React.Component {
         <PrivateHeader title="Client urls"/>
         <div className="page-content">
           <Nav />
-          Client urls page content.
+          
           <div className="item">
             { this.state.error !== '' ? this.state.error : undefined }
-            <form 
+            <form
               onSubmit={this.handleSubmit.bind(this)}>
               <input ref="url"
                 placeholder="http://example.com" />

@@ -9,7 +9,7 @@ export default () => {
       <PrivateHeader title="Dashboard"/>
       <div className="page-content">
         <Nav />
-        Dashboard page content.
+        
 
       </div>
     </div>

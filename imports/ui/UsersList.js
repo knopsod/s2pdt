@@ -22,7 +22,7 @@ class UsersList extends React.Component {
         <PrivateHeader title="Users"/>
         <div className="page-content">
           <Nav />
-          Users page content.
+          
           <FlipMove maintainContainerHeight={true}>
             {this.renderUsers()}
           </FlipMove>

@@ -24,16 +24,13 @@ class TransactionsList extends React.Component {
     this.page += 1;
   }
   renderTransaction() {
-    console.log('this.props.user: ', this.props.user);
     var isShowButton = false;
     if (this.props.user) {
       if ( _.has(this.props.user, 'role') ) {
         isShowButton = this.props.user.role !== 3;
-        console.log('isShowButton:', isShowButton);
       }
     }
 
-    console.log('this.props.transactions:', this.props.transactions);
     return this.props.transactions.map((tran) => {
       return <TransactionsListItem key={tran._id} tran={tran} isShowButton={isShowButton} />
     });
@@ -44,12 +41,11 @@ class TransactionsList extends React.Component {
         <PrivateHeader title="Transactions"/>
         <div className="page-content">
           <Nav />
-          Transactions page content.
 
           <FlipMove maintainContainerHeight={true}>
             {this.renderTransaction()}
           </FlipMove>
-          <button className="button button--pill" 
+          <button className="button button--pill"
             onClick={this.handleMoreClick.bind(this)}>
             More..
           </button>
