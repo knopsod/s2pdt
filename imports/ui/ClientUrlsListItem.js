@@ -13,8 +13,9 @@ class ClientUrlsListItem extends React.Component {
     browserHistory.replace('/url_setup');
   }
   render() {
-    return <div>
-      <button onClick={this.handleUrlSetupClick.bind(this)}>
+    return <div className="item">
+      <button className="button"
+        onClick={this.handleUrlSetupClick.bind(this)}>
         Setting
       </button>
       URL: {this.props.client_url.url},

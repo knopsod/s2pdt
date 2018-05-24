@@ -19,11 +19,16 @@ class TransactionsListItem extends React.Component {
 
     const tran = this.props.tran;
 
-    return <div>
-      { this.props.isShowButton && <button onClick={this.handleApproveClick.bind(this, tran._id, tran.isApproved)}>
-        Approved
-      </button> }
-      { tran.isApproved?'Yes':'No' },
+    let buttonClassName = tran.isApproved ? `button button--secondary` : `button`;
+
+    return <div className="item">
+      { this.props.isShowButton ?
+        <button className={buttonClassName}
+          onClick={this.handleApproveClick.bind(this, tran._id, tran.isApproved)}>
+          { tran.isApproved ? 'Approved' : 'Approve' }
+        </button>
+        : undefined
+      }
       {tran.client_url},
       Trans. ID: { tran.client_transaction_id },
       { tran.bank_account },

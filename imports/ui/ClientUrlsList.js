@@ -50,12 +50,13 @@ class ClientUrlsList extends React.Component {
         <div className="page-content">
           <Nav />
           Client urls page content.
-          <div>
+          <div className="item">
             { this.state.error !== '' ? this.state.error : undefined }
-            <form onSubmit={this.handleSubmit.bind(this)}>
+            <form 
+              onSubmit={this.handleSubmit.bind(this)}>
               <input ref="url"
                 placeholder="http://example.com" />
-              <input type="submit"/>
+              <input className="button" type="submit"/>
             </form>
           </div>
           <FlipMove maintainContainerHeight={true}>

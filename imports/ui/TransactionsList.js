@@ -49,7 +49,10 @@ class TransactionsList extends React.Component {
           <FlipMove maintainContainerHeight={true}>
             {this.renderTransaction()}
           </FlipMove>
-          <button onClick={this.handleMoreClick.bind(this)}>More..</button>
+          <button className="button button--pill" 
+            onClick={this.handleMoreClick.bind(this)}>
+            More..
+          </button>
         </div>
       </div>
     );

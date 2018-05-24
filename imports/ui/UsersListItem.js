@@ -17,11 +17,17 @@ class UsersListItem extends React.Component {
   render() {
 
     const user = this.props.user;
+    let buttonAdminClassName = user.role === 1 ? 'button' : 'button button--secondary';
+    let buttonUserClassName = user.role === 2 ? 'button' : 'button button--secondary';
+    let buttonCustomerClassName = user.role === 3 ? 'button' : 'button button--secondary';
 
-    return <div>
-      <button onClick={this.handleRoleClick.bind(this, user._id, 1)}>Admin</button>
-      <button onClick={this.handleRoleClick.bind(this, user._id, 2)}>User</button>
-      <button onClick={this.handleRoleClick.bind(this, user._id, 3)}>Customer</button>
+    return <div className="item">
+      <button className={buttonAdminClassName}
+        onClick={this.handleRoleClick.bind(this, user._id, 1)}>Admin</button>
+      <button className={buttonUserClassName}
+        onClick={this.handleRoleClick.bind(this, user._id, 2)}>User</button>
+      <button className={buttonCustomerClassName}
+        onClick={this.handleRoleClick.bind(this, user._id, 3)}>Customer</button>
       {user.emails[0].address},
       role:
         {(user.role === 1)?'admin':undefined}

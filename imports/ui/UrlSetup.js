@@ -92,7 +92,10 @@ class UrlSetup extends React.Component {
           <Nav />
           Setting URL page content.
           <div>
-            <button onClick={() => browserHistory.replace('/client_urls')}>&lt;Back</button>
+            <button className="button button--pill"
+              onClick={() => browserHistory.replace('/client_urls')}>
+              &lt;Back
+            </button>
           </div>
           <div>
             { this.state.error !== '' ? this.state.error : undefined }
@@ -117,13 +120,26 @@ class UrlSetup extends React.Component {
           </div>
           <FlipMove maintainContainerHeight={true}>
             {this.props.users.map((user) => {
-              return <div key={user._id}>
-                <button onClick={this.handleSetAsOwnerClick.bind(this, user)}>Set as owner</button>
-                <button onClick={this.handleSetAsApproverClick.bind(this, user)}>Set as approver</button>
+              let buttonOwnerClassName =
+                this.state.owner === user.emails[0].address ?
+                  'button' : 'button button--secondary';
+              let buttonApproverClassName =
+                this.state.approver === user.emails[0].address ?
+                  'button' : 'button button--secondary';
+              return <div className="item" key={user._id}>
+                <button className={buttonOwnerClassName}
+                  onClick={this.handleSetAsOwnerClick.bind(this, user)}>
+                  Owner
+                </button>
+                <button className={buttonApproverClassName}
+                  onClick={this.handleSetAsApproverClick.bind(this, user)}>
+                  Approver
+                </button>
                 {user.emails[0].address}
               </div>
             })}
           </FlipMove>
+
         </div>
       </div>
     );
