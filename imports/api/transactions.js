@@ -4,6 +4,7 @@ import { WebApp } from 'meteor/webapp';
 import moment from 'moment';
 import SimpleSchema from 'simpl-schema';
 import { HTTP } from 'meteor/http';
+import { ClientUrls } from './client_urls';
 
 export const Transactions = new Mongo.Collection('transactions');
 // const app = express();
@@ -17,9 +18,11 @@ if (Meteor.isServer) {
     if (role === 1) {
       return Transactions.find({}, { limit: perPage });
     } else if (role === 2) {
-      return Transactions.find({ approver: role }, { limit: perPage });
+      // return Transactions.find({}, { limit: perPage });
+      return Transactions.find({ approver: email }, { limit: perPage });
     } else if (role === 3) {
-      return Transactions.find({ owner: role }, { limit: perPage });
+      // return Transactions.find({}, { limit: perPage });
+      return Transactions.find({ owner: email }, { limit: perPage });
     }
   });
 
@@ -43,6 +46,9 @@ if (Meteor.isServer) {
           is_approved
       } = req.query;
 
+      const { owner, approver } = ClientUrls.findOne({url: client_url});
+      console.log("owner:", owner, "approver:", approver);
+
       const _id = Transactions.insert(
         {
             client_url,
@@ -57,7 +63,9 @@ if (Meteor.isServer) {
             isApproved: false,
             userId: this.userId,
             createdAt: moment().valueOf(),
-            updatedAt: moment().valueOf()
+            updatedAt: moment().valueOf(),
+            owner,
+            approver
         }
       );
 

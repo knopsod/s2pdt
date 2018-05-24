@@ -32,6 +32,8 @@ class TransactionsList extends React.Component {
         console.log('isShowButton:', isShowButton);
       }
     }
+
+    console.log('this.props.transactions:', this.props.transactions);
     return this.props.transactions.map((tran) => {
       return <TransactionsListItem key={tran._id} tran={tran} isShowButton={isShowButton} />
     });
