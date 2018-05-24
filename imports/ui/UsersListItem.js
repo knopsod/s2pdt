@@ -28,11 +28,7 @@ class UsersListItem extends React.Component {
         onClick={this.handleRoleClick.bind(this, user._id, 2)}>User</button>
       <button className={buttonCustomerClassName}
         onClick={this.handleRoleClick.bind(this, user._id, 3)}>Customer</button>
-      {user.emails[0].address},
-      role:
-        {(user.role === 1)?'admin':undefined}
-        {(user.role === 2)?'user':undefined}
-        {(user.role === 3)?'customer':undefined}
+      {user.emails[0].address}
     </div>
   }
 }

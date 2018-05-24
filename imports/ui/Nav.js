@@ -29,6 +29,7 @@ const Nav = (props) => {
             <li className={liClientUrlsClassName}><Link to="/client_urls" >Client urls</Link></li>
             : undefined }
           <li className={liTransClassName}><Link to="/transactions" >Transactions</Link></li>
+
         </ul>
       </div>
     </nav>

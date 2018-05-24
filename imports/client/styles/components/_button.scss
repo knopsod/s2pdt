@@ -10,7 +10,7 @@
   margin-right: 0.5rem;
   padding: $input-spacing;
   text-transform: uppercase;
-  
+
 }
 
 .button--link {
@@ -22,7 +22,8 @@
    background-color: transparent;
    border: 1px solid $button-pill-color;
    color: $button-pill-color;
-   margin: 0 ($space / 2) 0 0;
+   //margin: 0 ($space / 2) 0 0;
+   margin: 0 ($space / 2) ($space / 2) 0;
    padding: .3rem .8rem;
 }
 

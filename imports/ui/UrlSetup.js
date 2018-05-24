@@ -90,7 +90,6 @@ class UrlSetup extends React.Component {
         <PrivateHeader title="Setting URL"/>
         <div className="page-content">
           <Nav />
-          Setting URL page content.
           <div>
             <button className="button button--pill"
               onClick={() => browserHistory.replace('/client_urls')}>
@@ -100,24 +99,22 @@ class UrlSetup extends React.Component {
           <div>
             { this.state.error !== '' ? this.state.error : undefined }
           </div>
-          <div>
-            URL :
-            <input value={this.state.url}
-              placeholder="http://example.com"
-              onChange={this.handleUrlChange.bind(this)}/>
+          <div className="item">
+            <div>
+              URL :
+              <input value={this.state.url}
+                placeholder="http://example.com"
+                onChange={this.handleUrlChange.bind(this)}/>
+              </div>
+              {/* <div>
+                Default REST API endpoint :
+                <input value={this.state.endpoint}
+                  placeholder="http://example.com/api/transactions"
+                  onChange={this.handleEndpointChange.bind(this)}/>
+              </div> */}
+
           </div>
-          <div>
-            Default REST API endpoint :
-            <input value={this.state.endpoint}
-              placeholder="http://example.com/api/transactions"
-              onChange={this.handleEndpointChange.bind(this)}/>
-          </div>
-          <div>
-            Owner : {this.state.owner}
-          </div>
-          <div>
-            Approver : {this.state.approver}
-          </div>
+
           <FlipMove maintainContainerHeight={true}>
             {this.props.users.map((user) => {
               let buttonOwnerClassName =
