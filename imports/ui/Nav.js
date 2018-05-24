@@ -13,7 +13,8 @@ const Nav = (props) => {
 
   var liDashboardClassName = pathname === '/dashboard' ? 'active' : '';
   var liUsersClassName = pathname === '/users' ? 'active' : '';
-  var liClientUrlsClassName = pathname === '/client_urls' ? 'active' : '';
+  var liClientUrlsClassName =
+    (pathname === '/client_urls' || pathname === '/url_setup') ? 'active' : '';
   var liTransClassName = pathname === '/transactions' ? 'active' : '';
 
   return (
