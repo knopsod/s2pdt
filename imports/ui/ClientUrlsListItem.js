@@ -21,6 +21,7 @@ class ClientUrlsListItem extends React.Component {
       URL: {this.props.client_url.url},
       Owner: {this.props.client_url.owner},
       Approver: {this.props.client_url.approver}
+
     </div>;
   }
 }

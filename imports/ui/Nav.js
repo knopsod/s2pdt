@@ -4,6 +4,8 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import _ from 'lodash';
 
+import Accounts from './Accounts';
+
 const Nav = (props) => {
   var role;
 
@@ -30,7 +32,11 @@ const Nav = (props) => {
             <li className={liClientUrlsClassName}><Link to="/client_urls" >Client urls</Link></li>
             : undefined }
           <li className={liTransClassName}><Link to="/transactions" >Transactions</Link></li>
-
+          <li>
+            <div style={{marginTop: 15}}>
+              <Accounts />
+            </div>
+          </li>
         </ul>
       </div>
     </nav>
