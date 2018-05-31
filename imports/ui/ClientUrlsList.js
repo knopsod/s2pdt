@@ -49,14 +49,15 @@ class ClientUrlsList extends React.Component {
         <PrivateHeader title="Client urls"/>
         <div className="page-content">
           <Nav />
-          
+
           <div className="item">
             { this.state.error !== '' ? this.state.error : undefined }
             <form
               onSubmit={this.handleSubmit.bind(this)}>
-              <input ref="url"
-                placeholder="http://example.com" />
-              <input className="button" type="submit"/>
+              <input type="text" ref="url"
+                placeholder="http://custormer-url.com" />
+              {/* <input className="button" type="submit" /> */}
+              <button className="button" type="submit">Create</button>
             </form>
           </div>
           <FlipMove maintainContainerHeight={true}>

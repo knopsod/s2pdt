@@ -33,7 +33,7 @@ const Nav = (props) => {
             : undefined }
           <li className={liTransClassName}><Link to="/transactions" >Transactions</Link></li>
           <li>
-            <div style={{marginTop: 15}}>
+            <div style={{marginTop: 15, marginLeft: 15}}>
               <Accounts />
             </div>
           </li>

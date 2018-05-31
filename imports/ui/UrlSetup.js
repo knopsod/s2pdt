@@ -102,8 +102,8 @@ class UrlSetup extends React.Component {
           <div className="item">
             <div>
               URL :
-              <input value={this.state.url}
-                placeholder="http://example.com"
+              <input type="text" value={this.state.url}
+                placeholder="http://customer-url.com"
                 onChange={this.handleUrlChange.bind(this)}/>
               </div>
               {/* <div>
