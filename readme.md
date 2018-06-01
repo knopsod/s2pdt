@@ -33,7 +33,7 @@ And open `http://localhost:3000/` in your browser.
 #### Client
 Client use RESTful POST method to Shop2Pay endpoint
 ```
-POST http://shop2pay_dev_test.herokuapp.com/api/transactions
+POST http://shop2pay-dev-test.herokuapp.com/api/transactions
 ```
 and send data
 ```
