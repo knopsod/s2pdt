@@ -4,6 +4,7 @@ import { WebApp } from 'meteor/webapp';
 import moment from 'moment';
 import SimpleSchema from 'simpl-schema';
 import { HTTP } from 'meteor/http';
+import { Router } from 'meteor/iron:router';
 import { ClientUrls } from './client_urls';
 
 export const Transactions = new Mongo.Collection('transactions');
@@ -26,12 +27,38 @@ if (Meteor.isServer) {
     }
   });
 
+  // Router.route('/api/transactions', { where: 'server' })
+  //   .get(function() {
+  //     console.log('get:');
+  //   })
+  //   .post(function() {
+  //     console.log('post:');
+  //   });
+
+    Router.map(function() {
+      this.route('methodExample', {
+          path: '/api/transactions',
+          where: 'server',
+          action: function() {
+              // GET, POST, PUT, DELETE
+              var requestMethod = this.request.method;
+              // Data from a POST request
+              var requestData = this.request.body;
+              console.log(requestData);
+              // Could be, e.g. application/xml, etc.
+              this.response.writeHead(200, {'Content-Type': 'text/html'});
+              this.response.end('<html><body>Your request was a ' + requestMethod + '</body></html>');
+          }
+      });
+  });
+
   // Ref. https://forums.meteor.com/t/meteor-webapp-vs-picker-vs-simple-rest-for-rest-api/34034
   // Ref. https://hashnode.com/post/web-api-using-meteor-webapp-ciqgn0ukj0irtdd53uy12h6ia
+/*
   WebApp.connectHandlers.use('/api/transactions', (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
 
-    if(req.method === 'POST') {
+    if(req.method === 'POST' || true) {
 
       const {
           client_url,
@@ -46,8 +73,11 @@ if (Meteor.isServer) {
           is_approved
       } = req.query;
 
-      const { owner, approver } = ClientUrls.findOne({url: client_url});
-      console.log("owner:", owner, "approver:", approver);
+      // const { owner, approver } = ClientUrls.findOne({url: client_url});
+
+      const cu = ClientUrls.findOne({url: client_url});
+      const owner = '';
+      const approver = '';
 
       const _id = Transactions.insert(
         {
@@ -82,6 +112,7 @@ if (Meteor.isServer) {
       res.end();
     }
   });
+*/
 }
 
 Meteor.methods({

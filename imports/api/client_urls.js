@@ -19,12 +19,12 @@ Meteor.methods({
 
     const { url } = client_url;
 
-    new SimpleSchema({
-      url: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Url
-      }
-    }).validate({ url });
+    // new SimpleSchema({
+    //   url: {
+    //     type: String,
+    //     regEx: SimpleSchema.RegEx.Url
+    //   }
+    // }).validate({ url });
 
     return ClientUrls.insert({
       url,

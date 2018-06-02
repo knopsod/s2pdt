@@ -26,3 +26,4 @@ react-meteor-data
 http
 twbs:bootstrap
 accounts-ui
+iron:router
