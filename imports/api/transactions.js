@@ -4,7 +4,9 @@ import { WebApp } from 'meteor/webapp';
 import moment from 'moment';
 import SimpleSchema from 'simpl-schema';
 import { HTTP } from 'meteor/http';
-import { Router } from 'meteor/iron:router';
+import { Picker } from 'meteor/meteorhacks:picker';
+import bodyParser from 'body-parser';
+
 import { ClientUrls } from './client_urls';
 
 export const Transactions = new Mongo.Collection('transactions');
@@ -27,94 +29,28 @@ if (Meteor.isServer) {
     }
   });
 
-  // Router.route('/api/transactions', { where: 'server' })
-  //   .get(function() {
-  //     console.log('get:');
-  //   })
-  //   .post(function() {
-  //     console.log('post:');
-  //   });
+  // http://www.meteorpedia.com/read/REST_API
+  // https://forums.meteor.com/t/is-there-a-way-to-receive-requests-get-or-post-on-meteor-server/43127
+  // https://themeteorchef.com/tutorials/server-side-routing-with-picker
+  // https://forums.meteor.com/t/post-data-with-meteorhacks-picker/4657
+  Picker.middleware(bodyParser.json());
+  Picker.middleware(bodyParser.urlencoded( {extended: true} ) );
+  Picker.route('/api/transactions', function(params, req, res, next) {
+    if (req.method === 'POST') {
+      const _id = Transactions.insert(req.body);
 
-    Router.map(function() {
-      this.route('transactions.post', {
-          path: '/api/transactions',
-          where: 'server',
-          action: function() {
-              // GET, POST, PUT, DELETE
-              var requestMethod = this.request.method;
-              // Data from a POST request
-              var requestData = this.request.body;
-              if (requestData) {
-                console.log(requestData);
-              }
-              // Could be, e.g. application/xml, etc.
-              this.response.writeHead(200, {'Content-Type': 'text/html'});
-              this.response.end('<html><body>Your request was a ' + requestMethod + '</body></html>');
-          }
-      });
-  });
-
-  // Ref. https://forums.meteor.com/t/meteor-webapp-vs-picker-vs-simple-rest-for-rest-api/34034
-  // Ref. https://hashnode.com/post/web-api-using-meteor-webapp-ciqgn0ukj0irtdd53uy12h6ia
-/*
-  WebApp.connectHandlers.use('/api/transactions', (req, res, next) => {
-    res.setHeader('Content-Type', 'application/json');
-
-    if(req.method === 'POST' || true) {
-
-      const {
-          client_url,
-          client_rest_api_endpoint,
-          client_transaction_id,
-          bank_account,
-          bank_no,
-          bank_name,
-          bank_short_name,
-          amount,
-          transferred_datetime,
-          is_approved
-      } = req.query;
-
-      // const { owner, approver } = ClientUrls.findOne({url: client_url});
-
-      const cu = ClientUrls.findOne({url: client_url});
-      const owner = '';
-      const approver = '';
-
-      const _id = Transactions.insert(
-        {
-            client_url,
-            client_rest_api_endpoint,
-            client_transaction_id,
-            bank_account,
-            bank_no,
-            bank_name,
-            bank_short_name,
-            amount,
-            transferred_datetime,
-            isApproved: false,
-            userId: this.userId,
-            createdAt: moment().valueOf(),
-            updatedAt: moment().valueOf(),
-            owner,
-            approver
-        }
-      );
-
-      if(_id) {
+      if (_id) {
         res.writeHead(201); // 201 Created
         res.end();
       } else {
         res.writeHead(503); // 503 Service Unavailable
         res.end();
       }
-
     } else {
       res.writeHead(403); // 403 Forbiden
       res.end();
     }
   });
-*/
 }
 
 Meteor.methods({
@@ -172,6 +108,8 @@ Meteor.methods({
 
     if (result) {
       const tran = Transactions.findOne(_id);
+      delete tran._id;
+      
       try {
         // https://docs.meteor.com/api/http.html
         // https://themeteorchef.com/tutorials/using-the-http-package
