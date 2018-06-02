@@ -36,7 +36,7 @@ if (Meteor.isServer) {
   //   });
 
     Router.map(function() {
-      this.route('methodExample', {
+      this.route('transactions.post', {
           path: '/api/transactions',
           where: 'server',
           action: function() {
@@ -44,7 +44,9 @@ if (Meteor.isServer) {
               var requestMethod = this.request.method;
               // Data from a POST request
               var requestData = this.request.body;
-              console.log(requestData);
+              if (requestData) {
+                console.log(requestData);
+              }
               // Could be, e.g. application/xml, etc.
               this.response.writeHead(200, {'Content-Type': 'text/html'});
               this.response.end('<html><body>Your request was a ' + requestMethod + '</body></html>');
