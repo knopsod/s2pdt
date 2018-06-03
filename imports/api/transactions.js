@@ -29,15 +29,20 @@ if (Meteor.isServer) {
     }
   });
 
-  // http://www.meteorpedia.com/read/REST_API
-  // https://forums.meteor.com/t/is-there-a-way-to-receive-requests-get-or-post-on-meteor-server/43127
-  // https://themeteorchef.com/tutorials/server-side-routing-with-picker
-  // https://forums.meteor.com/t/post-data-with-meteorhacks-picker/4657
+  // Ref. http://www.meteorpedia.com/read/REST_API
+  // Ref. https://forums.meteor.com/t/is-there-a-way-to-receive-requests-get-or-post-on-meteor-server/43127
+  // Ref. https://themeteorchef.com/tutorials/server-side-routing-with-picker
+  // Ref. https://forums.meteor.com/t/post-data-with-meteorhacks-picker/4657
   Picker.middleware(bodyParser.json());
   Picker.middleware(bodyParser.urlencoded( {extended: true} ) );
   Picker.route('/api/transactions', function(params, req, res, next) {
     if (req.method === 'POST') {
-      const _id = Transactions.insert(req.body);
+      console.log(req.connection.remoteAddress);
+      const remoteAddress = req.connection.remoteAddress;
+      const _id = Transactions.insert({
+        ...req.body,
+        remoteAddress
+      });
 
       if (_id) {
         res.writeHead(201); // 201 Created
@@ -109,11 +114,11 @@ Meteor.methods({
     if (result) {
       const tran = Transactions.findOne(_id);
       delete tran._id;
-      
+
       try {
-        // https://docs.meteor.com/api/http.html
-        // https://themeteorchef.com/tutorials/using-the-http-package
-        // https://www.tutorialspoint.com/meteor/meteor_http.htm
+        // Ref. https://docs.meteor.com/api/http.html
+        // Ref. https://themeteorchef.com/tutorials/using-the-http-package
+        // Ref. https://www.tutorialspoint.com/meteor/meteor_http.htm
         HTTP.call( 'POST', tran.client_rest_api_endpoint, {
             data: {
               ...tran,
