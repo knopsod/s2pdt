@@ -56,6 +56,26 @@ if (Meteor.isServer) {
       res.end();
     }
   });
+
+  Picker.route('/api/v1/bank-accounts', function(params, req, res, next) {
+    if (req.method === 'GET') {
+      const bank_accounts = {
+        bank_accounts: [
+          {
+            id: 7856278,
+            bank_account: 'Apisak Sornram',
+            bank_no: '123-4-4567-8',
+            bank_name: 'kasikorn',
+            bank_short_name: 'KBANK',
+            currency: 'USD'
+          }
+        ]
+      };
+      res.setHeader('Content-Type', 'application/json');
+      res.statusCode = 200;
+      res.end(JSON.stringify(bank_accounts, {indent: true}));
+    }
+  });
 }
 
 Meteor.methods({
