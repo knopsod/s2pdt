@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import numeral from 'numeral';
 
 class TransactionsListTableItem extends Component {
   constructor(props) {
@@ -20,27 +21,56 @@ class TransactionsListTableItem extends Component {
 
     let buttonClassName = tran.isApproved ? `button button--secondary` : `button`;
 
+    let bankBgColor = 0x000000;
+
+    switch (tran.bank_short_name) {
+      case 'KBANK':
+        bankBgColor = '#088A29';
+        break;
+
+      case 'SCB':
+        bankBgColor = '#7a197a';
+        break;
+
+      case 'BAY':
+        bankBgColor = '#FACC2E';
+        break;
+
+      case 'GOV':
+        bankBgColor = '#F5A9E1';
+        break;
+
+      case 'TMB':
+        bankBgColor = '#0174DF';
+        break;
+
+      case 'KTB':
+        bankBgColor = '#81DAF5';
+        break;
+
+      default:
+
+    }
+
+    const statusBgColor = tran.isApproved ? '#c6c6c6' : '#383737';
+
     return <tr>
-      <td>
-        <div className="checkbox check-default text-center">
-         {/* <input id="checkbox21" type="checkbox" value="1" />
-         <label htmlFor="checkbox21"></label> */}
-         { this.props.isShowButton ?
-           <button className={buttonClassName}
-             onClick={this.handleApproveClick.bind(this, tran._id, tran.isApproved)}>
-             { tran.isApproved ? 'Approved' : 'Approve' }
-           </button>
-           : undefined
-         }
-       </div>
+      <td className="text-center">
+        { this.props.isShowButton ?
+          <button className={buttonClassName}
+            onClick={this.handleApproveClick.bind(this, tran._id, tran.isApproved)}>
+            { tran.isApproved ? 'Approved' : 'Approve' }
+          </button>
+          : undefined
+        }
       </td>
-      <td className="text-center"> 30/04/2017 18.30 </td>
-      <td className="text-center" style={{backgroundColor: 'green', color: 'gray'}}>กสิกรไทย</td>
+      <td className="text-center"> {tran.transferred_datetime} </td>
+      <td className="text-center" style={{backgroundColor: bankBgColor, color: 'gray'}}> { `${tran.bank_name} ${tran.bank_short_name}` }</td>
       <td className="text-center"> ADM </td>
-      <td className="text-center"> 5000 ฿ </td>
-      <td className="text-center"> Tranfer Withdraw NB (EDC098467) </td>
-      <td className="text-center" style={{backgroundColor: '#383737', color: 'gray'}}> แจ้งแล้ว </td>
-      <td className="text-center">14123</td>
+      <td className="text-center"> { numeral(tran.amount).format('0,0') } ฿ </td>
+      <td className="text-center"> { tran.transfer_type } </td>
+      <td className="text-center" style={{backgroundColor: statusBgColor, color: 'gray'}}> { tran.isApproved ? 'แจ้งแล้ว' : 'ยังไม่แจ้ง' }  </td>
+      <td className="text-center">{ tran.client_transaction_id }</td>
     </tr>;
   }
 }

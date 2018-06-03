@@ -37,7 +37,7 @@ if (Meteor.isServer) {
   Picker.middleware(bodyParser.urlencoded( {extended: true} ) );
   Picker.route('/api/transactions', function(params, req, res, next) {
     if (req.method === 'POST') {
-      console.log(req.connection.remoteAddress);
+      console.log(req.body);
       const remoteAddress = req.connection.remoteAddress;
       const _id = Transactions.insert({
         ...req.body,

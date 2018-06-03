@@ -55,7 +55,7 @@ class TransactionsList extends React.Component {
         <div className="page-content">
           <Nav />
 
-          <div className="item">
+          {/* <div className="item">
             <div className="row">
 
               <div className="col-md-2 text-center">DATE/TIME</div>
@@ -63,19 +63,18 @@ class TransactionsList extends React.Component {
               <div className="col-md-1 text-center">FROM</div>
               <div className="col-md-2 text-center">TOTAL AMOUNT</div>
               <div className="col-md-2 text-center">DETAILS</div>
-              {/* <div className="col-md-1 text-center">STATUS</div> */}
+              <div className="col-md-1 text-center">STATUS</div>
               <div className="col-md-2 text-center">ORDER ID</div>
               <div></div>
             </div>
           </div>
+           */}
+          {/*
           <FlipMove maintainContainerHeight={true}>
             {this.renderTransaction()}
-          </FlipMove>
+          </FlipMove> */}
 
-          <button className="button button--pill"
-            onClick={this.handleMoreClick.bind(this)}>
-            More..
-          </button>
+
 
           <div className="content">
             <div className="row">
@@ -117,10 +116,13 @@ class TransactionsList extends React.Component {
             </div>
           </div>
 
-
+          <button className="button button--pill"
+            onClick={this.handleMoreClick.bind(this)}>
+            More..
+          </button>
 
            {/* <div className="page-content"> */}
-             <div className="content">
+             {/* <div className="content">
                <div className="row">
                  <div className="col-md-12">
                    <div className="row">
@@ -130,12 +132,7 @@ class TransactionsList extends React.Component {
                            <table className="table table-bordered no-more-tables">
                  						<thead>
                  							<tr>
-                 								<th style={{width: '1%' }}>
-                 									{/* <div className="checkbox check-default">
-                 										<input id="checkbox20" type="checkbox" value="1" className="checkall" />
-                 										<label htmlFor="checkbox20"></label>
-                 									</div> */}
-                 								</th>
+                 								<th style={{width: '1%' }}></th>
                                  <th className="text-center" style={{width: '0%'}}>Date/Time</th>
                  								<th className="text-center" style={{width: '8%'}}>Bank</th>
                  								<th className="text-center" style={{width: '0%'}}>From</th>
@@ -147,12 +144,8 @@ class TransactionsList extends React.Component {
                  						</thead>
                  						<tbody>
                  							<tr>
-                                 <td>
-                                   <div className="checkbox check-default text-center">
-                 										{/* <input id="checkbox21" type="checkbox" value="1" />
-                 										<label htmlFor="checkbox21"></label> */}
-                                     <button className="button">APPROVE</button>
-                 									</div>
+                                 <td className="text-center">
+                                   <button className="button">APPROVE</button>
                                  </td>
                                  <td className="text-center"> 30/04/2017 18.30 </td>
                                  <td className="text-center" style={{backgroundColor: 'green', color: 'gray'}}>กสิกรไทย</td>
@@ -164,11 +157,7 @@ class TransactionsList extends React.Component {
                                </tr>
                                <tr>
                                  <td>
-                                   <div className="checkbox check-default text-center">
-                                     {/* <input id="checkbox22" type="checkbox" value="1" />
-                                     <label htmlFor="checkbox22"></label> */}
-                                     <button className="button button--secondary">APPROVED</button>
-                                   </div>
+                                   <button className="button button--secondary">APPROVED</button>
                                  </td>
                                  <td className="text-center"> 30/04/2017 20.30 </td>
                                  <td className="text-center" style={{backgroundColor: '#7a197a', color:'gray'}}>ไทยพาณิชย์</td>
@@ -186,7 +175,7 @@ class TransactionsList extends React.Component {
                    </div>
                  </div>
                </div>
-             </div>
+             </div> */}
            {/* </div> */}
 
         </div>
