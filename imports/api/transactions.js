@@ -37,8 +37,18 @@ if (Meteor.isServer) {
   Picker.middleware(bodyParser.urlencoded( {extended: true} ) );
   Picker.route('/api/transactions', function(params, req, res, next) {
     if (req.method === 'POST') {
-      // console.log(req.body);
+
+      const headers = req.headers;
+
+      // console.log(headers.authorization);
+      // if (headers.authorization !== 'Token token=tb3vQwhAnJc2PNkusWvkgB4pA8wnVLpy7CXpEsz7jL' ) {
+      //   res.writeHead(403); // 403 Forbiden
+      //   res.end();
+      //   return;
+      // }
+
       const remoteAddress = req.connection.remoteAddress;
+
       const _id = Transactions.insert({
         ...req.body,
         remoteAddress
@@ -59,18 +69,7 @@ if (Meteor.isServer) {
 
   Picker.route('/api/v1/bank-accounts', function(params, req, res, next) {
     if (req.method === 'GET') {
-      const bank_accounts = {
-        bank_accounts: [
-          {
-            id: 7856278,
-            bank_account: 'Apisak Sornram',
-            bank_no: '123-4-4567-8',
-            bank_name: 'kasikorn',
-            bank_short_name: 'KBANK',
-            currency: 'USD'
-          }
-        ]
-      };
+      const bank_accounts = HTTP.get(Meteor.absoluteUrl('/files/bank-accounts.json')).data;
       res.setHeader('Content-Type', 'application/json');
       res.statusCode = 200;
       // res.end(JSON.stringify(bank_accounts, {indent: true}));
