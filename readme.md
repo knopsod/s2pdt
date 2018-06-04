@@ -45,10 +45,10 @@ and send data
     bank_no: "999-9-9999-9",
     bank_name: "kasikorn",
     bank_short_name: "KBANK", // ref. http://www.bangkokbank.com/download/SMART_Member_Banks_Eng_.pdf
-    transfer_type,
+    transfer_type: "ATM",
     amount: 2999,
     transferred_datetime: "2018-01-01 10:00:00",
-    transfer_detail,
+    transfer_detail: "Some comment message from user",
     is_approved: "false"
 }
 ```
@@ -68,10 +68,10 @@ and send data
     bank_no: "999-9-9999-9",
     bank_name: "kasikorn",
     bank_short_name: "KBANK", // ref. http://www.bangkokbank.com/download/SMART_Member_Banks_Eng_.pdf
-    transfer_type,
+    transfer_type: "ATM",
     amount: 2999,
     transferred_datetime: "2018-01-01 10:00:00",
-    transfer_detail,
+    transfer_detail: "Some comment message from user",
     is_approved: "true",
     approved_datetime: "2018-01-01 11:00:00"
 }
