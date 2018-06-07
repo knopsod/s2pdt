@@ -12,9 +12,17 @@ import UsersList from '../ui/UsersList';
 import TransactionsList from '../ui/TransactionsList';
 import ClientUrlsList from '../ui/ClientUrlsList';
 import UrlSetup from '../ui/UrlSetup';
+import UIExample from '../ui/UIExample';
 
 const unauthenticatedPages = ['/', '/signup'];
-const authenticatedPages = ['/dashboard', '/users', '/transactions', '/client_urls', 'url_setup'];
+const authenticatedPages = [
+  '/dashboard',
+  '/users',
+  '/transactions',
+  '/client_urls',
+  '/url_setup',
+  '/uiexample'
+];
 const onEnterPublicPage = () => {
   if (Meteor.userId()) {
     browserHistory.replace('/dashboard');
@@ -55,6 +63,7 @@ export const routes = (
     <Route path="/transactions" component={TransactionsList} onEnter={onEnterPrivatePage}/>
     <Route path="/client_urls" component={ClientUrlsList} onEnter={onEnterPrivatePage}/>
     <Route path="/url_setup" component={UrlSetup} onEnter={onEnterPrivatePage}/>
+    <Route path="/uiexample" component={UIExample} onEnter={onEnterPrivatePage}/>
     <Route path="*" component={NotFound}/>
   </Router>
 );

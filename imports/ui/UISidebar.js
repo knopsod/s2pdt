@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class UISidebar extend Component {
+class UISidebar extends Component {
   constructor( props ) {
     super( props );
   }
