@@ -12,7 +12,6 @@ class UIExample extends Component {
     return (
       <div>
         <UIHeader />
-        <UISidebar />
       </div>
     );
   }
