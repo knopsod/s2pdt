@@ -13,6 +13,7 @@ import TransactionsList from '../ui/TransactionsList';
 import ClientUrlsList from '../ui/ClientUrlsList';
 import UrlSetup from '../ui/UrlSetup';
 import UIExample from '../ui/UIExample';
+import UITemplate from '../ui/UITemplate';
 
 const unauthenticatedPages = [ '/', '/signup' ];
 const authenticatedPages = [
@@ -21,7 +22,8 @@ const authenticatedPages = [
   '/transactions',
   '/client_urls',
   '/url_setup',
-  '/uiexample'
+  '/uiexample',
+  '/uitemplate'
 ];
 const onEnterPublicPage = () => {
   if ( Meteor.userId() ) {
@@ -65,6 +67,7 @@ export const routes = (
     <Route path="/client_urls" component={ ClientUrlsList } onEnter={ onEnterPrivatePage }/>
     <Route path="/url_setup" component={ UrlSetup } onEnter={ onEnterPrivatePage }/>
     <Route path="/uiexample" component={ UIExample } onEnter={ onEnterPrivatePage }/>
+    <Route path="/uitemplate" component={ UITemplate } onEnter={ onEnterPrivatePage }/>
     <Route path="*" component={ NotFound }/>
   </Router>
 );
