@@ -3,17 +3,17 @@ import React, { Component } from 'react';
 // import UIHeader from './UIHeader';
 // import UISidebar from './UISidebar';
 
-import '../client/styles/assets/plugins/pace/pace-theme-flash.css';
-
-import '../client/styles/assets/plugins/boostrapv3/css/bootstrap.min.css';
-import '../client/styles/assets/plugins/boostrapv3/css/bootstrap-theme.min.css';
-import '../client/styles/assets/plugins/font-awesome/css/font-awesome.css';
-import '../client/styles/assets/css/animate.min.css';
-import '../client/styles/assets/plugins/jquery-scrollbar/jquery.scrollbar.css';
-
-import '../client/styles/assets/css/style.css';
-import '../client/styles/assets/css/responsive.css';
-import '../client/styles/assets/css/custom-icon-set.css';
+// import '../client/styles/assets/plugins/pace/pace-theme-flash.css';
+//
+// import '../client/styles/assets/plugins/boostrapv3/css/bootstrap.min.css';
+// import '../client/styles/assets/plugins/boostrapv3/css/bootstrap-theme.min.css';
+// import '../client/styles/assets/plugins/font-awesome/css/font-awesome.css';
+// import '../client/styles/assets/css/animate.min.css';
+// import '../client/styles/assets/plugins/jquery-scrollbar/jquery.scrollbar.css';
+//
+// import '../client/styles/assets/css/style.css';
+// import '../client/styles/assets/css/responsive.css';
+// import '../client/styles/assets/css/custom-icon-set.css';
 
 const uiExample = ( props ) => {
   return (
