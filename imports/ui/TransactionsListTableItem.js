@@ -19,7 +19,7 @@ class TransactionsListTableItem extends Component {
   render() {
     const tran = this.props.tran;
 
-    let buttonClassName = tran.isApproved ? `button button--secondary` : `button`;
+    let buttonClassName = tran.isApproved ? `btn` : `btn btn-primary`;
 
     let bankBgColor = 0x000000;
 

@@ -91,18 +91,18 @@ class UrlSetup extends React.Component {
         <div className="page-content">
           <Nav />
           <div>
-            <button className="button button--pill"
+            <button className="btn btn-default"
               onClick={() => browserHistory.replace('/client_urls')}>
-              &lt;Back
+              {`< Back`}
             </button>
           </div>
+          <br />
           <div>
             { this.state.error !== '' ? this.state.error : undefined }
           </div>
           <div className="item">
             <div>
-              URL :
-              <input type="text" value={this.state.url}
+              <input type="text" value={this.state.url} className="form-control"
                 placeholder="http://customer-url.com"
                 onChange={this.handleUrlChange.bind(this)}/>
               </div>
@@ -115,7 +115,48 @@ class UrlSetup extends React.Component {
 
           </div>
 
-          <FlipMove maintainContainerHeight={true}>
+          <table className="table table-bordered no-more-tables">
+            <thead>
+            <tr>
+                {/* <th style="width:1%">
+                    <div className="checkbox check-default">
+                        <input id="checkbox20" type="checkbox" value="1" className="checkall"/>
+                        <label for="checkbox20"></label>
+                    </div>
+                </th> */}
+                <th className="text-center" style={{width: '0%'}}>Email</th>
+                <th className="text-center" style={{width: '0%'}}>Owner</th>
+                <th className="text-center" style={{width: '0%'}}>Approver</th>
+            </tr>
+            </thead>
+            <tbody>
+              {this.props.users.map((user) => {
+                let buttonOwnerClassName =
+                  this.state.owner === user.emails[0].address ?
+                    'btn btn-success' : 'btn btn-default';
+                let buttonApproverClassName =
+                  this.state.approver === user.emails[0].address ?
+                    'btn btn-success' : 'btn btn-default';
+                return <tr key={user._id}>
+                  <td className="text-center"> {user.emails[0].address} </td>
+                  <td className="text-center">
+                    <button className={buttonOwnerClassName}
+                      onClick={this.handleSetAsOwnerClick.bind(this, user)}>
+                      Owner
+                    </button>
+                  </td>
+                  <td className="text-center">
+                    <button className={buttonApproverClassName}
+                      onClick={this.handleSetAsApproverClick.bind(this, user)}>
+                      Approver
+                    </button>
+                  </td>
+                </tr>;
+              })}
+            </tbody>
+          </table>
+
+          {/* <FlipMove maintainContainerHeight={true}>
             {this.props.users.map((user) => {
               let buttonOwnerClassName =
                 this.state.owner === user.emails[0].address ?
@@ -135,7 +176,7 @@ class UrlSetup extends React.Component {
                 {user.emails[0].address}
               </div>
             })}
-          </FlipMove>
+          </FlipMove> */}
 
         </div>
       </div>

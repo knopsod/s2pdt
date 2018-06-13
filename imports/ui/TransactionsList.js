@@ -3,11 +3,13 @@ import FlipMove from 'react-flip-move';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import _ from 'lodash';
+import _u from 'underscore';
 
 import PrivateHeader from './PrivateHeader';
 import Nav from './Nav';
 import TransactionsListItem from './TransactionsListItem';
 import TransactionsListTableItem from './TransactionsListTableItem';
+import TransactionsListBankSums from './TransactionsListBankSums';
 
 import { Transactions } from '../api/transactions';
 
@@ -48,6 +50,11 @@ class TransactionsList extends React.Component {
       return <TransactionsListTableItem key={tran._id} tran={tran} isShowButton={isShowButton} />
     });
   }
+  renderBankSums() {
+    return this.props.bankSums.map((tran, index) => {
+      return <TransactionsListBankSums key={index} tran={tran} />
+    });
+  }
   render() {
     return (
       <div>
@@ -81,6 +88,20 @@ class TransactionsList extends React.Component {
               <div className="col-md-12">
                 <div className="row">
                   <div className="col-md-12">
+                    { this.renderBankSums() }
+
+                    <div className="col-sm-3 col-xs-12">
+                        <div className="panel panel-default" style={{border: '0px'}}>
+                            <div className="panel-heading text-left"
+                              style={{background: '#2c3e50', color: '#ffffff', border: '0px', borderRadius: '0px'}}>
+                              <strong>รวมทั้งหมด</strong></div>
+                            <div className="panel-body text-right"
+                              style={{background: '#2c3e50', color:'#ffffff', padding:'0px 15px 10px 15px'}}>
+                                <span style={{fontSize: '20px'}}>0.00</span> <small>บาท</small>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="grid simple ">
                       <div className="grid-body no-border">
                         <table className="table table-bordered no-more-tables">
@@ -103,8 +124,8 @@ class TransactionsList extends React.Component {
                           </thead>
                           <tbody>
                             {this.renderTransactionsTable()}
-                            <FlipMove maintainContainerHeight={true}>
-                            </FlipMove>
+                            {/* <FlipMove maintainContainerHeight={true}>
+                            </FlipMove> */}
 
                           </tbody>
                         </table>
@@ -116,7 +137,7 @@ class TransactionsList extends React.Component {
             </div>
           </div>
 
-          <button className="button button--pill"
+          <button className="btn btn-default"
             onClick={this.handleMoreClick.bind(this)}>
             More..
           </button>
@@ -187,9 +208,26 @@ class TransactionsList extends React.Component {
 export default createContainer(() => {
   Meteor.subscribe('transactions', PER_PAGE);
 
+  const user = Meteor.user();
+  const meteorCall = Meteor.call;
+  const transactions = Transactions.find({}, { sort: { isApproved: 1, updatedAt: -1 } }).fetch();
+  const uniqs = _u.uniq(Transactions.find({ isApproved: { $ne: true } }, {
+    sort: {bank_short_name: 1}, fields: {bank_short_name: true}
+  }).fetch().map(function(x) {
+    return x.bank_short_name;
+  }), true);
+
+  const bankSums = [];
+  for(let i = 0; i < uniqs.length; i++ ) {
+    bankSums.push({ bank_short_name: uniqs[i] });
+  }
+
+  console.log(bankSums);
+
   return {
-    user: Meteor.user(),
-    meteorCall: Meteor.call,
-    transactions: Transactions.find({}, { sort: { isApproved: 1, updatedAt: -1 } }).fetch()
+    user,
+    meteorCall,
+    transactions,
+    bankSums
   };
 }, TransactionsList);
