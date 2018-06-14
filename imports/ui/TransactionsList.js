@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import _ from 'lodash';
 import _u from 'underscore';
+import numeral from 'numeral';
 
 import PrivateHeader from './PrivateHeader';
 import Nav from './Nav';
@@ -97,7 +98,7 @@ class TransactionsList extends React.Component {
                               <strong>รวมทั้งหมด</strong></div>
                             <div className="panel-body text-right"
                               style={{background: '#2c3e50', color:'#ffffff', padding:'0px 15px 10px 15px'}}>
-                                <span style={{fontSize: '20px'}}>0.00</span> <small>บาท</small>
+                                <span style={{fontSize: '20px'}}>{ numeral(this.props.sumAll).format('0,0') }</span> <small>บาท</small>
                             </div>
                         </div>
                     </div>
@@ -218,8 +219,23 @@ export default createContainer(() => {
   }), true);
 
   const bankSums = [];
-  for(let i = 0; i < uniqs.length; i++ ) {
-    bankSums.push({ bank_short_name: uniqs[i] });
+  let sum = 0;
+  let sumAll = 0;
+  for (let i = 0; i < uniqs.length; i++ ) {
+    for (let j = 0; j < transactions.length; j++ ) {
+      if ( transactions[j].bank_short_name === uniqs[i] ) {
+        sum = sum + parseInt(transactions[j].amount);
+      }
+    }
+
+    bankSums.push({
+      bank_short_name: uniqs[i],
+      sum,
+    });
+
+    sumAll = sumAll + sum;
+
+    sum = 0;
   }
 
   console.log(bankSums);
@@ -228,6 +244,7 @@ export default createContainer(() => {
     user,
     meteorCall,
     transactions,
-    bankSums
+    bankSums,
+    sumAll,
   };
 }, TransactionsList);

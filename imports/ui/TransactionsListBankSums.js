@@ -1,4 +1,5 @@
 import React from 'react';
+import numeral from 'numeral';
 
 const transactionsListBankSums = (props) => {
   let bankBgColor = 0x000000;
@@ -48,7 +49,7 @@ const transactionsListBankSums = (props) => {
             </div>
             <div className="panel-body text-right"
               style={{background: bankBgColor, color: '#ffffff', padding: '0px 15px 10px 15px'}}>
-                <span style={{fontSize: '20px'}}>0.00</span> <small>บาท</small>
+                <span style={{fontSize: '20px'}}>{ numeral(props.tran.sum).format('0,0') }</span> <small>บาท</small>
             </div>
         </div>
     </div>
