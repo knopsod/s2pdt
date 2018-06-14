@@ -68,10 +68,10 @@ if (Meteor.isServer) {
   });
 
   Picker.route('/api/v1/bank-accounts', function(params, req, res, next) {
-
+    // console.log(Meteor.absoluteUrl('files/bank-accounts.json'));
     if (req.method === 'GET') {
       const bank_accounts = HTTP.get(
-        Meteor.absoluteUrl('/files/bank-accounts.json', { rootUrl: process.env.ROOT_URL })
+        Meteor.absoluteUrl('files/bank-accounts.json')
       ).data;
       res.setHeader('Content-Type', 'application/json');
       res.statusCode = 200;
