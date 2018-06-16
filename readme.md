@@ -33,13 +33,13 @@ And open `http://localhost:3000/` in your browser.
 #### Client
 Client use RESTful POST method to Shop2Pay endpoint
 ```
-POST http://shop2pay-dev-test.herokuapp.com/api/transactions
+POST http://shop2pay-dev-test.herokuapp.com/api/v1/transactions
 ```
 and send data
 ```
 {
     client_url: "http://example.com",
-    client_rest_api_endpoint: "https://example.com/api/transactions", // optional data if not provide, use default data that set in Shop2Pay
+    client_rest_api_endpoint: "https://example.com/api/v1/transactions", // optional data if not provide, use default data that set in Shop2Pay
     client_transaction_id: "abcd1234", // ref. internal id of client web
     bank_account: "John Doe",
     bank_no: "999-9-9999-9",
@@ -56,13 +56,13 @@ and send data
 #### Shop2Pay
 Shop2Pay use RESTful POST method to client endpoint
 ```
-POST http://example.com/api/transactions
+POST http://example.com/api/v1/transactions
 ```
 and send data
 ```
 {
     client_url: "http://example.com",
-    client_rest_api_endpoint: "https://example.com/api/transactions", // optional data if not provide, use default data that set in Shop2Pay
+    client_rest_api_endpoint: "https://example.com/api/v1/transactions", // optional data if not provide, use default data that set in Shop2Pay
     client_transaction_id: "abcd1234", // ref. internal id of client web
     bank_account: "John Doe",
     bank_no: "999-9-9999-9",
