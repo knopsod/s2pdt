@@ -35,7 +35,7 @@ if (Meteor.isServer) {
   // Ref. https://forums.meteor.com/t/post-data-with-meteorhacks-picker/4657
   Picker.middleware(bodyParser.json());
   Picker.middleware(bodyParser.urlencoded( {extended: true} ) );
-  Picker.route('/api/transactions', function(params, req, res, next) {
+  Picker.route('/api/v1/transactions', function(params, req, res, next) {
     if (req.method === 'POST') {
 
       const headers = req.headers;
