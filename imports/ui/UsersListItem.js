@@ -67,6 +67,9 @@ class UsersListItem extends React.Component {
             </ul>
           </div>
         </td>
+        <td>
+          <button className="btn btn-medium btn-danger">Remove</button>
+        </td>
       </tr>
     );
 

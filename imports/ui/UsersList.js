@@ -13,7 +13,7 @@ class UsersList extends React.Component {
   }
   renderUsers() {
     return this.props.users.map(function (user) {
-      return <UsersListItem key={user._id} user={user} />
+      return (<UsersListItem key={user._id} user={user} />)
     });
   }
   render() {
@@ -42,6 +42,7 @@ class UsersList extends React.Component {
                   <th style={{width: '22%'}}>Description</th>
                   <th style={{width: '6%'}}>Role</th>
                   <th style={{width: '10%'}}>Actions</th>
+                  <th style={{width: '10%'}}>Remove</th>
                 </tr>
               </thead>
               <tbody>
