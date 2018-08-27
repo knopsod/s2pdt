@@ -40,7 +40,7 @@ class ClientUrlsList extends React.Component {
   }
   renderClientUrls() {
     return this.props.client_urls.map(function (cu) {
-      return <ClientUrlsListItem key={cu._id} client_url={cu}/>
+      return (<ClientUrlsListItem key={cu._id} client_url={cu}/>)
     });
   }
   render() {
@@ -88,6 +88,7 @@ class ClientUrlsList extends React.Component {
                   <th className="text-center" style={{width: '0%'}}>Owner</th>
                   <th className="text-center" style={{width: '0%'}}>Approver</th>
                   <th className="text-center" style={{width: '8%'}}>Setup</th>
+                  <th className="text-center" style={{width: '8%'}}>Remove</th>
               </tr>
               </thead>
               <tbody>

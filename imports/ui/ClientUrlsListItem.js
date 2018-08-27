@@ -29,6 +29,11 @@ class ClientUrlsListItem extends React.Component {
               onClick={this.handleUrlSetupClick.bind(this)}>
             <i className="icon-ok"></i>Setup</button>
           </td>
+          <td className="text-center">
+            <button type="setup" className="btn btn-danger"
+              >
+            <i className="icon-remove"></i>Remove</button>
+          </td>
       </tr>
     );
     // return <div className="item">
