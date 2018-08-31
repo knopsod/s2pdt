@@ -1,6 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 
+import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 
@@ -11,6 +12,16 @@ class ClientUrlsListItem extends React.Component {
   handleUrlSetupClick() {
     this.props.Session.set('selectedClientUrlId', this.props.client_url._id);
     browserHistory.replace('/url_setup');
+  }
+  handleRemove(_id) {
+    var r = confirm("Are you sure to delete?" + _id);
+    if (r == true) {
+      // this.props.meteorCall('users.remove',
+      //   _id,
+      //   (err, res) => {
+
+      //   });
+    }
   }
   render() {
     return (
@@ -31,7 +42,7 @@ class ClientUrlsListItem extends React.Component {
           </td>
           <td className="text-center">
             <button type="setup" className="btn btn-danger"
-              >
+              onClick={this.handleRomove.bind(this, client_url._id)}>
             <i className="icon-remove"></i>Remove</button>
           </td>
       </tr>
@@ -51,6 +62,7 @@ class ClientUrlsListItem extends React.Component {
 
 export default createContainer(() => {
   return {
-    Session
+    Session,
+    meteorCall: Meteor.call
   }
 }, ClientUrlsListItem);
