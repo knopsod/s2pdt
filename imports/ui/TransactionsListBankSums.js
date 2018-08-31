@@ -3,37 +3,37 @@ import numeral from 'numeral';
 
 const transactionsListBankSums = (props) => {
   let bankBgColor = 0x000000;
-  let bankName = 'ธนาคารอื่นๆ';
+  let bankName = 'Other Bank';
 
   switch (props.tran.bank_short_name) {
     case 'KBANK':
       bankBgColor = '#088A29';
-      bankName = 'กสิกรไทย';
+      bankName = 'Kasikorn Bank';
       break;
 
     case 'SCB':
       bankBgColor = '#7a197a';
-      bankName = 'ไทยพาณิชย';
+      bankName = 'Siam Commercial';
       break;
 
     case 'BAY':
       bankBgColor = '#FACC2E';
-      bankName = 'กรุงศรีฯ';
+      bankName = 'Bank of Ayudhya';
       break;
 
     case 'GOV':
       bankBgColor = '#F5A9E1';
-      bankName = 'ออมสิน';
+      bankName = 'Goverment Saving Bank';
       break;
 
     case 'TMB':
       bankBgColor = '#0174DF';
-      bankName = 'ทหารไทย';
+      bankName = 'TMB Bank';
       break;
 
     case 'KTB':
       bankBgColor = '#81DAF5';
-      bankName = 'กรุงไทย';
+      bankName = 'Krungthai Bank';
       break;
 
     default:
@@ -49,7 +49,7 @@ const transactionsListBankSums = (props) => {
             </div>
             <div className="panel-body text-right"
               style={{background: bankBgColor, color: '#ffffff', padding: '0px 15px 10px 15px'}}>
-                <span style={{fontSize: '20px'}}>{ numeral(props.tran.sum).format('0,0') }</span> <small>บาท</small>
+                <span style={{fontSize: '20px'}}>{ numeral(props.tran.sum).format('0,0') }</span> <small>Baht</small>
             </div>
         </div>
     </div>

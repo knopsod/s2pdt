@@ -95,10 +95,10 @@ class TransactionsList extends React.Component {
                         <div className="panel panel-default" style={{border: '0px'}}>
                             <div className="panel-heading text-left"
                               style={{background: '#2c3e50', color: '#ffffff', border: '0px', borderRadius: '0px'}}>
-                              <strong>รวมทั้งหมด</strong></div>
+                              <strong>Pending Approval</strong></div>
                             <div className="panel-body text-right"
                               style={{background: '#2c3e50', color:'#ffffff', padding:'0px 15px 10px 15px'}}>
-                                <span style={{fontSize: '20px'}}>{ numeral(this.props.sumAll).format('0,0') }</span> <small>บาท</small>
+                                <span style={{fontSize: '20px'}}>{ numeral(this.props.sumAll).format('0,0') }</span> <small>Baht</small>
                             </div>
                         </div>
                     </div>

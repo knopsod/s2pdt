@@ -69,7 +69,7 @@ class TransactionsListTableItem extends Component {
       <td className="text-center"> { tran.transfer_type } </td>
       <td className="text-center"> { numeral(tran.amount).format('0,0') } ฿ </td>
       <td className="text-center"> { tran.transfer_detail } </td>
-      <td className="text-center" style={{backgroundColor: statusBgColor, color: 'gray'}}> { tran.isApproved ? 'แจ้งแล้ว' : 'ยังไม่แจ้ง' }  </td>
+      <td className="text-center" style={{backgroundColor: statusBgColor, color: 'gray'}}> { tran.isApproved ? 'Approved' : 'None Approve' }  </td>
       <td className="text-center">{ tran.client_transaction_id }</td>
     </tr>;
   }
