@@ -13,16 +13,6 @@ class ClientUrlsListItem extends React.Component {
     this.props.Session.set('selectedClientUrlId', this.props.client_url._id);
     browserHistory.replace('/url_setup');
   }
-  handleRemove(_id) {
-    var r = confirm("Are you sure to delete?" + _id);
-    if (r == true) {
-      // this.props.meteorCall('users.remove',
-      //   _id,
-      //   (err, res) => {
-
-      //   });
-    }
-  }
   render() {
     return (
       <tr>
@@ -41,8 +31,7 @@ class ClientUrlsListItem extends React.Component {
             <i className="icon-ok"></i>Setup</button>
           </td>
           <td className="text-center">
-            <button type="setup" className="btn btn-danger"
-              onClick={this.handleRomove.bind(this, client_url._id)}>
+            <button type="setup" className="btn btn-danger">
             <i className="icon-remove"></i>Remove</button>
           </td>
       </tr>
