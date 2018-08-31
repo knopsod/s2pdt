@@ -14,6 +14,16 @@ class UsersListItem extends React.Component {
 
       });
   }
+  handleRemove(_id) {
+    var r = confirm("Are you sure to delete?");
+    if (r == true) {
+      this.props.meteorCall('users.remove',
+        _id,
+        (err, res) => {
+
+        });
+    }
+  }
   render() {
 
     const user = this.props.user;
@@ -68,7 +78,8 @@ class UsersListItem extends React.Component {
           </div>
         </td>
         <td>
-          <button className="btn btn-medium btn-danger">Remove</button>
+          <button className="btn btn-medium btn-danger"
+            onClick={this.handleRemove.bind(this, user._id)}>Remove</button>
         </td>
       </tr>
     );

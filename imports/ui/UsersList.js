@@ -42,7 +42,7 @@ class UsersList extends React.Component {
                   <th style={{width: '22%'}}>Description</th>
                   <th style={{width: '6%'}}>Role</th>
                   <th style={{width: '10%'}}>Actions</th>
-                  <th style={{width: '10%'}}>Remove</th>
+                  <th style={{width: '5%'}}>Remove</th>
                 </tr>
               </thead>
               <tbody>
