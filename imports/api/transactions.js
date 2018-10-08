@@ -49,10 +49,12 @@ if (Meteor.isServer) {
 
       const remoteAddress = req.connection.remoteAddress;
       const { client_url } = req.body;
+
+      // https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
       const short_client_url = client_url.replace(/(^\w+:|^)\/\//, '');
 
-      // https://steelkiwi.com/blog/mongo-collections-meteorjs/
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+      // https://steelkiwi.com/blog/mongo-collections-meteorjs/
       var re = new RegExp('.*' + short_client_url + '.*');
       const { approver, owner } = ClientUrls.findOne({url: re});
 
