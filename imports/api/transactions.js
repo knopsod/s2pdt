@@ -50,7 +50,11 @@ if (Meteor.isServer) {
       const remoteAddress = req.connection.remoteAddress;
       const { client_url } = req.body;
       const short_client_url = client_url.replace(/(^\w+:|^)\/\//, '');
-      const { approver, owner } = ClientUrls.findOne({});
+
+      // https://steelkiwi.com/blog/mongo-collections-meteorjs/
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+      var re = new RegExp('.*' + short_client_url + '.*')
+      const { approver, owner } = ClientUrls.findOne({url: re});
 
       const _id = Transactions.insert({
         ...req.body,
