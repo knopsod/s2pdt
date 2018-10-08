@@ -53,7 +53,7 @@ if (Meteor.isServer) {
 
       // https://steelkiwi.com/blog/mongo-collections-meteorjs/
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-      var re = new RegExp('.*' + short_client_url + '.*')
+      var re = new RegExp('.*' + short_client_url + '.*');
       const { approver, owner } = ClientUrls.findOne({url: re});
 
       const _id = Transactions.insert({
