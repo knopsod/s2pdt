@@ -121,6 +121,7 @@ class TransactionsList extends React.Component {
                                <th className="text-center" style={{width: '0%'}}>Details</th>
                                <th className="text-center" style={{width: '0%'}}>Status</th>
                                <th className="text-center" style={{width: '0%'}}>Order ID</th>
+                               <th className="text-center" style={{width: '0%'}}>***trace***</th>
                             </tr>
                           </thead>
                           <tbody>
