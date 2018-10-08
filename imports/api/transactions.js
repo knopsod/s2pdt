@@ -48,10 +48,16 @@ if (Meteor.isServer) {
       // }
 
       const remoteAddress = req.connection.remoteAddress;
+      const { client_url } = req.body;
+      const short_client_url = client_url.replace(/(^\w+:|^)\/\//, '');
+      const { approver, owner } = ClientUrls.findOne({});
 
       const _id = Transactions.insert({
         ...req.body,
-        remoteAddress
+        remoteAddress,
+        approver,
+        owner,
+        short_client_url
       });
 
       if (_id) {
