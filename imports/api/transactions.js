@@ -36,6 +36,8 @@ if (Meteor.isServer) {
   Picker.middleware(bodyParser.json());
   Picker.middleware(bodyParser.urlencoded( {extended: true} ) );
   Picker.route('/api/v1/transactions', function(params, req, res, next) {
+    console.log('/api/v1/transactions has been trigged');
+    console.log(req);
     if (req.method === 'POST') {
 
       const headers = req.headers;
@@ -52,11 +54,12 @@ if (Meteor.isServer) {
 
       // https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
       const short_client_url = client_url.replace(/(^\w+:|^)\/\//, '');
+      console.log(short_client_url);
 
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
       // https://steelkiwi.com/blog/mongo-collections-meteorjs/
       var re = new RegExp('.*' + short_client_url + '.*');
-      const { approver, owner } = ClientUrls.findOne({url: re});
+      const { approver, owner } = ClientUrls.findOne({url: re}) ? ClientUrls.findOne({url: re}) : { approver: '', owner: '' };
 
       const _id = Transactions.insert({
         ...req.body,
