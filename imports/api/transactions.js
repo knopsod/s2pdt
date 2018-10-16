@@ -66,7 +66,8 @@ if (Meteor.isServer) {
         remoteAddress,
         approver,
         owner,
-        short_client_url
+        short_client_url,
+        is_approved: (req.body.is_approved === '0' || req.body.is_approved === '') ? false : req.body.is_approved
       });
 
       if (_id) {
