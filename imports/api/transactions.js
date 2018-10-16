@@ -15,7 +15,7 @@ export const Transactions = new Mongo.Collection('transactions');
 if (Meteor.isServer) {
   Meteor.publish('transactions', function (perPage) {
 
-    const role = Meteor.users.findOne(this.userId).role;
+    const role = Meteor.users.findOne(this.userId).role ? Meteor.users.findOne(this.userId).role : 3;
     const email = Meteor.users.findOne(this.userId).emails[0].address;
 
     if (role === 1) {
@@ -37,7 +37,7 @@ if (Meteor.isServer) {
   Picker.middleware(bodyParser.urlencoded( {extended: true} ) );
   Picker.route('/api/v1/transactions', function(params, req, res, next) {
     console.log('/api/v1/transactions has been trigged');
-    console.log(req);
+    console.log('req.body -> ', req.body);
     if (req.method === 'POST') {
 
       const headers = req.headers;
@@ -54,7 +54,7 @@ if (Meteor.isServer) {
 
       // https://stackoverflow.com/questions/8206269/how-to-remove-http-from-a-url-in-javascript
       const short_client_url = client_url.replace(/(^\w+:|^)\/\//, '');
-      console.log(short_client_url);
+      console.log('short_client_url -> ', short_client_url);
 
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
       // https://steelkiwi.com/blog/mongo-collections-meteorjs/
