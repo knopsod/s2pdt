@@ -1,2 +1,6 @@
 env: flex
 runtime: custom
+env_variables:
+  ROOT_URL: https://shop2pay-dev-test.appspot-preview.com
+  MONGO_URL: mongodb://shop2pay:pay2sh0p@ds215910.mlab.com:15910/heroku_sq1371q9
+  DISABLE_WEBSOCKETS: "1"

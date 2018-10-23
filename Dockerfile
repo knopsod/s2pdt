@@ -1,11 +1,11 @@
 # Dockerfile extending the generic Node image with application files for a
 # single application.
-FROM gcr.io/google_appengine/nodejs
+#FROM gcr.io/google_appengine/nodejs
 # Check to see if the the version included in the base runtime satisfies
 # 4.6.2, if not then do an npm install of the latest available
 # version that satisfies it.
-RUN /usr/local/bin/install_node 4.6.2
-COPY . /app/
+#RUN /usr/local/bin/install_node 4.6.2
+#COPY . /app/
 # You have to specify "--unsafe-perm" with npm install
 # when running as root.  Failing to do this can cause
 # install to appear to succeed even if a preinstall
@@ -13,8 +13,13 @@ COPY . /app/
 # as well.
 # This command will also cat the npm-debug.log file after the
 # build, if it exists.
-RUN npm install --unsafe-perm || \
-  ((if [ -f npm-debug.log ]; then \
-      cat npm-debug.log; \
-    fi) && false)
-CMD npm start
+#RUN npm install --unsafe-perm || \
+#  ((if [ -f npm-debug.log ]; then \
+#      cat npm-debug.log; \
+#    fi) && false)
+#CMD npm start
+
+FROM gcr.io/google_appengine/nodejs
+COPY . /app/
+RUN (cd programs/server && npm install --unsafe-perm)
+CMD node main.js
