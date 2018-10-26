@@ -14,6 +14,7 @@ import ClientUrlsList from '../ui/ClientUrlsList';
 import UrlSetup from '../ui/UrlSetup';
 import UIExample from '../ui/UIExample';
 import UITemplate from '../ui/UITemplate';
+import WithdrawsList from '../ui/WithdrawsList';
 
 const unauthenticatedPages = [ '/', '/signup' ];
 const authenticatedPages = [
@@ -68,6 +69,7 @@ export const routes = (
     <Route path="/url_setup" component={ UrlSetup } onEnter={ onEnterPrivatePage }/>
     <Route path="/uiexample" component={ UIExample } onEnter={ onEnterPrivatePage }/>
     <Route path="/uitemplate" component={ UITemplate } onEnter={ onEnterPrivatePage }/>
+    <Route path="/withdraws" component={ WithdrawsList } onEnter={ onEnterPrivatePage }/>
     <Route path="*" component={ NotFound }/>
   </Router>
 );

@@ -18,6 +18,7 @@ const Nav = (props) => {
   var liClientUrlsClassName =
     (pathname === '/client_urls' || pathname === '/url_setup') ? 'active' : '';
   var liTransClassName = pathname === '/transactions' ? 'active' : '';
+  var liWithdrawsClassName = pathname === '/withdraws' ? 'active' : '';
 
   return (
     <nav className="navbar navbar-default">
@@ -32,6 +33,7 @@ const Nav = (props) => {
             <li className={liClientUrlsClassName}><Link to="/client_urls" >Client urls</Link></li>
             : undefined }
           <li className={liTransClassName}><Link to="/transactions" >Transactions</Link></li>
+          <li className={liWithdrawsClassName}><Link to="/withdraws" >Withdraws</Link></li>
           <li>
             <div style={{marginTop: 15, marginLeft: 15}}>
               <Accounts />
