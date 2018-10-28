@@ -37,8 +37,8 @@ class WithdrawsList extends React.Component {
         <td />
         <td />
         <td />
-        <td />
         <td>{wDr._id}</td>
+        <td />
       </tr>
     });
   }
