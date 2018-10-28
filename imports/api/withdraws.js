@@ -10,7 +10,7 @@ export const Withdraws = new Mongo.Collection('withdraws');
 // const app = express();
 
 if (Meteor.isServer) {
-  Meteor.publish('wihtdraws', function (perPage) {
+  Meteor.publish('withdraws', function (perPage) {
     return Withdraws.find({});
   });
 
