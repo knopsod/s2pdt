@@ -114,14 +114,14 @@ class TransactionsList extends React.Component {
                                   <label htmlFor="checkbox20"></label>
                                 </div> */}
                               </th>
-                               <th className="text-center" style={{width: '0%'}}>Date/Time</th>
-                              <th className="text-center" style={{width: '8%'}}>Bank</th>
-                              <th className="text-center" style={{width: '0%'}}>From</th>
-                               <th className="text-center" style={{width: '0%'}}>Total amount</th>
-                               <th className="text-center" style={{width: '0%'}}>Details</th>
-                               <th className="text-center" style={{width: '0%'}}>Status</th>
-                               <th className="text-center" style={{width: '0%'}}>Order ID</th>
-                               <th className="text-center" style={{width: '0%'}}>***trace***</th>
+                                <th className="text-center" style={{width: '0%'}}>Date/Time</th>
+                                <th className="text-center" style={{width: '8%'}}>Bank</th>
+                                <th className="text-center" style={{width: '0%'}}>From</th>
+                                <th className="text-center" style={{width: '0%'}}>Total amount</th>
+                                <th className="text-center" style={{width: '0%'}}>Details</th>
+                                <th className="text-center" style={{width: '0%'}}>Status</th>
+                                <th className="text-center" style={{width: '0%'}}>Order ID</th>
+                                <th className="text-center" style={{width: '0%'}}>***trace***</th>
                             </tr>
                           </thead>
                           <tbody>

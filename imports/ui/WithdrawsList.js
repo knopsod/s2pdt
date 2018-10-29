@@ -8,9 +8,7 @@ import numeral from 'numeral';
 
 import PrivateHeader from './PrivateHeader';
 import Nav from './Nav';
-import TransactionsListItem from './TransactionsListItem';
-import TransactionsListTableItem from './TransactionsListTableItem';
-import TransactionsListBankSums from './TransactionsListBankSums';
+import WithdrawsListTableItem from './WithdrawsListTableItem';
 
 import { Withdraws } from '../api/withdraws';
 
@@ -28,18 +26,17 @@ class WithdrawsList extends React.Component {
     this.page += 1;
   }
   renderWithdrawsTable() {
-    return this.props.withdraws.map((wDr, index) => {
-      return <tr>
-        <td>{1 + index}</td>
-        <td />
-        <td />
-        <td />
-        <td />
-        <td />
-        <td />
-        <td>{wDr._id}</td>
-        <td />
-      </tr>
+    var isShowButton = false;
+    if (this.props.user) {
+      if ( _.has(this.props.user, 'role') ) {
+        isShowButton = this.props.user.role !== 3;
+      }
+    }
+    return this.props.withdraws.map((wd) => {
+      return <WithdrawsListTableItem 
+        key={ wd._id } 
+        withdraw={ wd } 
+        isShowButton={isShowButton} />;
     });
   }
   render() {

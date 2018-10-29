@@ -67,7 +67,13 @@ if (Meteor.isServer) {
         approver,
         owner,
         short_client_url,
-        is_approved: (req.body.is_approved === '0' || req.body.is_approved === '') ? false : req.body.is_approved,
+        is_approved: !(
+          req.body.is_approved === false || 
+          req.body.is_approved === 'false' || 
+          req.body.is_approved === '' ||
+          req.body.is_approved === '0' ||
+          req.body.is_approved === 0
+        ),
         createdAt: (req.body.createdAt) ? req.body.createdAt : moment().valueOf(),
         creatorId: (req.body.creatorId) ? req.body.creatorId : null
       });
