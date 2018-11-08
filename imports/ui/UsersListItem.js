@@ -82,17 +82,7 @@ class UsersListItem extends React.Component {
             onClick={this.handleRemove.bind(this, user._id)}>Remove</button>
         </td>
       </tr>
-    );
-
-    // return <div className="item">
-    //   <button className={buttonAdminClassName}
-    //     onClick={this.handleRoleClick.bind(this, user._id, 1)}>Admin</button>
-    //   <button className={buttonUserClassName}
-    //     onClick={this.handleRoleClick.bind(this, user._id, 2)}>User</button>
-    //   <button className={buttonCustomerClassName}
-    //     onClick={this.handleRoleClick.bind(this, user._id, 3)}>Customer</button>
-    //   {user.emails[0].address}
-    // </div>
+    );    
   }
 }
 

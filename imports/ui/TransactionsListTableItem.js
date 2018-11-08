@@ -16,6 +16,16 @@ class TransactionsListTableItem extends Component {
 
       });
   }
+  handleRemove(_id) {
+    var r = confirm("Are you sure to delete?");
+    if (r == true) {
+      this.props.meteorCall('transactions.remove',
+        _id,
+        (err, res) => {
+
+        });
+    }
+  }
   render() {
     const tran = this.props.tran;
 
@@ -76,7 +86,8 @@ class TransactionsListTableItem extends Component {
       <td className="text-center">{ tran.client_transaction_id }</td>
       { this.props.isShowButton ? 
         <td className="text-center">
-          <button className="btn btn-medium btn-danger">Remove</button>
+          <button className="btn btn-medium btn-danger"
+            onClick={this.handleRemove.bind(this, tran._id)}>Remove</button>
         </td> : undefined
       }
       <td className="text-center" style={{ fontSize: 8 }}>
