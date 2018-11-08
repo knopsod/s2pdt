@@ -22,10 +22,10 @@ if (Meteor.isServer) {
       return Transactions.find({}, { sort: { transferred_datetime: -1 }, limit: perPage });
     } else if (role === 2) {
       // return Transactions.find({}, { limit: perPage });
-      return Transactions.find({ approver: email }, { sort: { transferred_datetime: -1 }, limit: perPage });
+      return Transactions.find({ owner: email }, { sort: { transferred_datetime: -1 }, limit: perPage });
     } else if (role === 3) {
       // return Transactions.find({}, { limit: perPage });
-      return Transactions.find({ owner: email }, { sort: { transferred_datetime: -1 }, limit: perPage });
+      return Transactions.find({ approver: email }, { sort: { transferred_datetime: -1 }, limit: perPage });
     }
   });
 

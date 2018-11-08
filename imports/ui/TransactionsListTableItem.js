@@ -55,23 +55,36 @@ class TransactionsListTableItem extends Component {
     const statusBgColor = tran.isApproved ? '#c6c6c6' : '#383737';
 
     return <tr>
-      <td className="text-center">
-        { this.props.isShowButton ?
+      { this.props.isShowButton ?
+        <td className="text-center">
           <button className={buttonClassName}
             onClick={this.handleApproveClick.bind(this, tran._id, tran.isApproved)}>
             { tran.isApproved ? 'Approved' : 'Approve' }
           </button>
-          : undefined
-        }
-      </td>
+        </td> : undefined
+      }
       <td className="text-center"> {tran.transferred_datetime} </td>
-      <td className="text-center" style={{backgroundColor: bankBgColor, color: 'gray'}}> { `${tran.bank_name} ${tran.bank_short_name}` }</td>
+      <td className="text-center" style={{backgroundColor: bankBgColor, color: 'gray'}}> 
+        { `${tran.bank_name} ${tran.bank_short_name}` }</td>
+      <td className="text-center"> { tran.bank_no } </td>
+      <td className="text-center"> { tran.bank_account } </td>
       <td className="text-center"> { tran.transfer_type } </td>
       <td className="text-center"> { numeral(tran.amount).format('0,0') } ฿ </td>
       <td className="text-center"> { tran.transfer_detail } </td>
-      <td className="text-center" style={{backgroundColor: statusBgColor, color: 'gray'}}> { tran.isApproved ? 'Approved' : 'None Approve' }  </td>
+      <td className="text-center" style={{backgroundColor: statusBgColor, color: 'gray'}}> 
+        { tran.isApproved ? 'Approved' : 'None Approve' }  </td>
       <td className="text-center">{ tran.client_transaction_id }</td>
-      <td className="text-center">{ tran.client_url }*{ tran.approver }*{ tran.owner }*{ tran.short_client_url }</td>
+      { this.props.isShowButton ? 
+        <td className="text-center">
+          <button className="btn btn-medium btn-danger">Remove</button>
+        </td> : undefined
+      }
+      <td className="text-center" style={{ fontSize: 8 }}>
+        client_url: { tran.client_url }<br />
+        approver: { tran.approver }<br />
+        owner: { tran.owner }<br />
+        short_client_url: { tran.short_client_url }<br />
+      </td>
     </tr>;
   }
 }
